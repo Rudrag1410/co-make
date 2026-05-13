@@ -5,8 +5,23 @@ import Image from "next/image";
 import { fetchProperties } from "@/lib/api";
 import { PropertyCard } from "@/components/PropertyCard";
 
-export default async function ListingsPage() {
-  const properties = await fetchProperties(40);
+export default async function ListingsPage(props: { 
+  searchParams: Promise<{ category?: string }> 
+}) {
+  const searchParams = await props.searchParams;
+  const category = searchParams.category;
+  
+  const allProperties = await fetchProperties(100);
+  
+  const properties = category 
+    ? allProperties.filter(p => {
+        const cat = category.toLowerCase();
+        const title = p.title?.toLowerCase() || "";
+        const desc = p.description?.toLowerCase() || "";
+        // Check title, description and also common category names
+        return title.includes(cat) || desc.includes(cat);
+      })
+    : allProperties;
 
   return (
     <main className="min-h-screen bg-white">
