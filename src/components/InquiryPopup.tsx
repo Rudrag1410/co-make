@@ -48,18 +48,18 @@ export function InquiryPopup() {
               <div className="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-3">
                 <Building className="w-6 h-6 text-gold" />
               </div>
-              <h3 className="text-white font-serif text-2xl font-bold mb-1">
-                Exclusive Access
+              <h3 className="text-white font-serif text-2xl font-bold mb-1 leading-tight">
+                Get a call within <br/> few seconds 📞
               </h3>
-              <p className="text-gold text-[10px] uppercase tracking-widest font-bold">
-                Unlock Premium Off-Plan Properties
+              <p className="text-gold text-[10px] uppercase tracking-widest font-bold mt-2">
+                Fast & Direct Assistance
               </p>
             </div>
 
             {/* Form Body */}
             <div className="p-6">
               <p className="text-slate-600 text-sm text-center mb-6">
-                Register your interest to receive VIP access to upcoming Dubai launches and personalized investment strategies.
+                Leave your number below and we will call you right away!
               </p>
 
               <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsOpen(false); }}>
@@ -85,20 +85,9 @@ export function InquiryPopup() {
                     placeholder="+971 50 123 4567"
                   />
                 </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 ml-1">
-                    Interested In
-                  </label>
-                  <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all text-slate-700">
-                    <option>Luxury Villas</option>
-                    <option>Waterfront Penthouses</option>
-                    <option>Off-Plan Investments</option>
-                    <option>Commercial Spaces</option>
-                  </select>
-                </div>
 
                 <Button type="submit" className="w-full bg-gold hover:bg-gold-light text-slate-950 font-bold rounded-xl py-6 tracking-widest text-[10px] uppercase mt-2 group">
-                  Get VIP Access
+                  REQUEST CALLBACK
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </form>

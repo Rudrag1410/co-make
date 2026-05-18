@@ -115,21 +115,40 @@ export function Footer() {
               Contact Info
             </h4>
             <ul className="space-y-4">
-              <li className="flex items-start space-x-3">
-                <MapPin className="text-gold w-4 h-4 shrink-0" />
-                <span className="text-white/60 text-xs">
-                  Office No# 517, Al Barsha 1 Building, Al Barsha, Dubai, UAE
-                </span>
+              <li>
+                <a
+                  href="https://maps.google.com/?q=Office+No+517,+Al+Barsha+1+Building,+Al+Barsha,+Dubai,+UAE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start space-x-3 group cursor-pointer"
+                >
+                  <MapPin className="text-gold w-4 h-4 shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="text-white/60 text-xs group-hover:text-gold transition-colors">
+                    Office No# 517, Al Barsha 1 Building, Al Barsha, Dubai, UAE
+                  </span>
+                </a>
               </li>
-              <li className="flex items-center space-x-3">
-                <Phone className="text-gold w-4 h-4 shrink-0" />
-                <span className="text-white/60 text-xs">+971 58 116 1051</span>
+              <li>
+                <a
+                  href="tel:+971581161051"
+                  className="flex items-center space-x-3 group cursor-pointer"
+                >
+                  <Phone className="text-gold w-4 h-4 shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="text-white/60 text-xs group-hover:text-gold transition-colors">
+                    +971 58 116 1051
+                  </span>
+                </a>
               </li>
-              <li className="flex items-center space-x-3">
-                <Mail className="text-gold w-4 h-4 shrink-0" />
-                <span className="text-white/60 text-xs">
-                  comakehomes88@gmail.com
-                </span>
+              <li>
+                <a
+                  href="mailto:comakehomes88@gmail.com"
+                  className="flex items-center space-x-3 group cursor-pointer"
+                >
+                  <Mail className="text-gold w-4 h-4 shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="text-white/60 text-xs group-hover:text-gold transition-colors">
+                    comakehomes88@gmail.com
+                  </span>
+                </a>
               </li>
             </ul>
           </div>

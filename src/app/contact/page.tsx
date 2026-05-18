@@ -7,14 +7,14 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="relative pt-28 pb-16 bg-slate-950 text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-slate-950/60 z-10" />
-          <Image 
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=100&w=3840&auto=format&fit=crop" 
-            alt="Contact Us" 
+          <Image
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=100&w=3840&auto=format&fit=crop"
+            alt="Contact Us"
             fill
             className="object-cover opacity-30"
             priority
@@ -40,13 +40,16 @@ export default function ContactPage() {
             Join Our <span className="italic text-gold">Elite</span> Team
           </h2>
           <p className="text-slate-600 mb-8 max-w-2xl mx-auto text-sm leading-relaxed">
-            At Comake Homes, we are always looking for ambitious, high-performing individuals to join our prestigious real estate advisory team. If you have a passion for luxury properties and a drive for excellence, we want to hear from you.
+            At Comake Homes, we are always looking for ambitious,
+            high-performing individuals to join our prestigious real estate
+            advisory team. If you have a passion for luxury properties and a
+            drive for excellence, we want to hear from you.
           </p>
           <a
             href="mailto:careers@comakehomes.com"
-            className="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-900 text-gold font-bold rounded-full px-8 py-4 tracking-widest text-xs uppercase transition-transform active:scale-95 group"
+            className="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-900 text-gold font-bold rounded-full px-8 py-4 tracking-widest text-xs uppercase transition-transform active:scale-95 group cursor-pointer"
           >
-            Submit Your Resume
+            Send us a mail
             <svg
               className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform"
               fill="none"
@@ -54,7 +57,12 @@ export default function ContactPage() {
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
             </svg>
           </a>
         </div>
