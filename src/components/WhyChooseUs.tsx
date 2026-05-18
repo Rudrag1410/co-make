@@ -55,7 +55,7 @@ export function WhyChooseUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-4xl font-serif font-bold text-emerald-950"
+            className="text-3xl md:text-4xl font-serif font-bold text-slate-950"
           >
             Why Discerning Investors <br />
             <span className="italic text-gold">Choose</span> Our Expertise
@@ -71,13 +71,13 @@ export function WhyChooseUs() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
               whileHover={{ y: -5 }}
-              className="bg-white p-8 rounded-[2rem] shadow-lg shadow-emerald-950/5 border border-emerald-950/5 group transition-all duration-500"
+              className="bg-white p-8 rounded-[2rem] shadow-lg shadow-slate-950/5 border border-slate-950/5 group transition-all duration-500"
             >
-              <div className="w-12 h-12 rounded-xl bg-emerald-950/5 flex items-center justify-center text-gold mb-6 group-hover:bg-gold group-hover:text-emerald-950 transition-colors duration-500">
+              <div className="w-12 h-12 rounded-xl bg-slate-950/5 flex items-center justify-center text-gold mb-6 group-hover:bg-gold group-hover:text-slate-950 transition-colors duration-500">
                 <reason.icon className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-serif font-bold text-emerald-950 mb-3">{reason.title}</h3>
-              <p className="text-emerald-950/60 text-xs leading-relaxed">
+              <h3 className="text-lg font-serif font-bold text-slate-950 mb-3">{reason.title}</h3>
+              <p className="text-slate-950/60 text-xs leading-relaxed">
                 {reason.desc}
               </p>
             </motion.div>

@@ -30,7 +30,7 @@ export function AreaDetailContent({
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-emerald-950/60 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[1px]" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10 text-center">
@@ -67,17 +67,17 @@ export function AreaDetailContent({
       {hasStats && (
         <section className="relative z-20 -mt-12">
           <div className="container mx-auto px-6">
-            <div className="bg-white p-6 md:p-10 rounded-[2rem] shadow-2xl border border-emerald-950/5 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="bg-white p-6 md:p-10 rounded-[2rem] shadow-2xl border border-slate-950/5 grid grid-cols-2 md:grid-cols-4 gap-6">
               {area.stats?.map((stat, idx: number) => (
                 <div
                   key={idx}
-                  className="text-center border-r last:border-0 border-emerald-950/10 px-2"
+                  className="text-center border-r last:border-0 border-slate-950/10 px-2"
                 >
-                  <h3 className="text-2xl font-serif font-bold text-emerald-950 mb-1">
+                  <h3 className="text-2xl font-serif font-bold text-slate-950 mb-1">
                     {stat.value}
                     {stat.suffix}
                   </h3>
-                  <p className="text-emerald-950/40 text-[9px] uppercase font-bold tracking-widest">
+                  <p className="text-slate-950/40 text-[9px] uppercase font-bold tracking-widest">
                     {stat.label}
                   </p>
                 </div>
@@ -105,16 +105,16 @@ export function AreaDetailContent({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-3xl md:text-4xl font-serif font-bold text-emerald-950 mb-6"
+                className="text-3xl md:text-4xl font-serif font-bold text-slate-950 mb-6"
               >
                 About <span className="italic text-gold">{area.title}</span>
               </motion.h2>
               <div
-                className="text-emerald-950/80 text-base leading-relaxed mb-8 space-y-4"
+                className="text-slate-950/80 text-base leading-relaxed mb-8 space-y-4"
                 dangerouslySetInnerHTML={{ __html: area.aboutArea }}
               />
               <Link href="/contact">
-                <Button className="bg-gold hover:bg-gold/90 text-emerald-950 font-bold rounded-full px-8 py-6 h-auto tracking-widest text-[10px] shadow-lg shadow-gold/20 transition-all hover:scale-105 active:scale-95">
+                <Button className="bg-gold hover:bg-gold/90 text-slate-950 font-bold rounded-full px-8 py-6 h-auto tracking-widest text-[10px] shadow-lg shadow-gold/20 transition-all hover:scale-105 active:scale-95">
                   REQUEST AREA GUIDE
                   <ArrowRight className="ml-2 w-3.5 h-3.5" />
                 </Button>
@@ -138,13 +138,13 @@ export function AreaDetailContent({
                 </div>
               </motion.div>
               <div className="absolute -bottom-8 -right-8 bg-gradient-to-br from-gold to-[#b38a34] p-7 rounded-[2rem] shadow-[0_20px_50px_rgba(179,138,52,0.3)] border border-white/20 hidden md:block">
-                <div className="w-10 h-10 rounded-xl bg-emerald-950/10 flex items-center justify-center text-emerald-950 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-slate-950/10 flex items-center justify-center text-slate-950 mb-4">
                   <TrendingUp className="w-5 h-5" />
                 </div>
-                <p className="text-emerald-950 font-serif font-bold text-xl leading-none mb-1.5">
+                <p className="text-slate-950 font-serif font-bold text-xl leading-none mb-1.5">
                   Elite Choice
                 </p>
-                <p className="text-emerald-950/60 text-[8px] font-bold uppercase tracking-[0.2em]">
+                <p className="text-slate-950/60 text-[8px] font-bold uppercase tracking-[0.2em]">
                   Market Status
                 </p>
               </div>
@@ -161,7 +161,7 @@ export function AreaDetailContent({
               <p className="text-gold font-bold uppercase tracking-[0.2em] text-[10px] mb-3">
                 Featured Projects
               </p>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-emerald-950">
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-950">
                 Latest Listings in{" "}
                 <span className="italic text-gold">{area.title}</span>
               </h2>
@@ -175,7 +175,7 @@ export function AreaDetailContent({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
-                  className="bg-white rounded-3xl overflow-hidden shadow-xl border border-emerald-950/5 group"
+                  className="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-950/5 group"
                 >
                   <div className="relative h-64 overflow-hidden">
                     <Image
@@ -184,23 +184,23 @@ export function AreaDetailContent({
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute top-4 left-4 bg-emerald-950/80 backdrop-blur-md text-gold text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                    <div className="absolute top-4 left-4 bg-slate-950/80 backdrop-blur-md text-gold text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                       {property.category}
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-lg font-serif font-bold text-emerald-950 mb-2 line-clamp-1">
+                    <h3 className="text-lg font-serif font-bold text-slate-950 mb-2 line-clamp-1">
                       {property.title}
                     </h3>
-                    <p className="text-emerald-950/40 text-[10px] font-bold uppercase tracking-widest mb-4">
+                    <p className="text-slate-950/40 text-[10px] font-bold uppercase tracking-widest mb-4">
                       {property.developer.name}
                     </p>
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       <div className="flex flex-col">
-                        <span className="text-emerald-950/40 text-[8px] uppercase font-bold tracking-widest mb-1">
+                        <span className="text-slate-950/40 text-[8px] uppercase font-bold tracking-widest mb-1">
                           Starting Price
                         </span>
-                        <span className="text-emerald-950 text-xs font-bold">
+                        <span className="text-slate-950 text-xs font-bold">
                           AED{" "}
                           {property.startingPrice > 0
                             ? property.startingPrice.toLocaleString()
@@ -208,7 +208,7 @@ export function AreaDetailContent({
                         </span>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-emerald-950/40 text-[8px] uppercase font-bold tracking-widest mb-1">
+                        <span className="text-slate-950/40 text-[8px] uppercase font-bold tracking-widest mb-1">
                           ROI Est.
                         </span>
                         <span className="text-gold text-xs font-bold">
@@ -216,7 +216,7 @@ export function AreaDetailContent({
                         </span>
                       </div>
                     </div>
-                    <Button className="w-full bg-transparent border border-emerald-950/10 text-emerald-950 hover:bg-gold hover:border-gold hover:text-emerald-950 transition-all rounded-full py-4 text-[9px] font-bold uppercase tracking-widest">
+                    <Button className="w-full bg-transparent border border-slate-950/10 text-slate-950 hover:bg-gold hover:border-gold hover:text-slate-950 transition-all rounded-full py-4 text-[9px] font-bold uppercase tracking-widest">
                       VIEW PROJECT
                     </Button>
                   </div>
@@ -232,11 +232,11 @@ export function AreaDetailContent({
         <section className="py-16 bg-white">
           <div className="container mx-auto px-6 text-center">
             <div className="max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-emerald-950 mb-6">
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-950 mb-6">
                 Why Discerning Investors{" "}
                 <span className="italic text-gold">Choose</span> {area.title}
               </h2>
-              <p className="text-emerald-950/60 text-sm leading-relaxed">
+              <p className="text-slate-950/60 text-sm leading-relaxed">
                 {area.whyAreaName}
               </p>
             </div>
@@ -265,15 +265,15 @@ export function AreaDetailContent({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
-                  className="bg-offwhite p-8 rounded-2xl border border-emerald-950/5"
+                  className="bg-offwhite p-8 rounded-2xl border border-slate-950/5"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-emerald-950/5 flex items-center justify-center text-gold mx-auto mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-slate-950/5 flex items-center justify-center text-gold mx-auto mb-6">
                     <item.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-serif font-bold text-emerald-950 mb-3">
+                  <h3 className="text-lg font-serif font-bold text-slate-950 mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-emerald-950/60 text-xs leading-relaxed">
+                  <p className="text-slate-950/60 text-xs leading-relaxed">
                     {item.desc}
                   </p>
                 </motion.div>

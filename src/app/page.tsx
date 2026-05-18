@@ -10,6 +10,7 @@ import { InvestmentCTA } from "@/components/InvestmentCTA";
 import { LeadForm } from "@/components/LeadForm";
 import { Footer } from "@/components/Footer";
 import { fetchAreas, fetchProperties } from "@/lib/api";
+import { InquiryPopup } from "@/components/InquiryPopup";
 
 export default async function Home() {
   const [areas, properties] = await Promise.all([
@@ -20,6 +21,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
+      <InquiryPopup />
       <Hero />
       <div className="relative z-10 bg-white">
         <PopularAreas areas={areas} />

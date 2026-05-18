@@ -21,8 +21,8 @@ export function AboutSection() {
             >
                 <div className="relative h-[500px]">
                   <Image
-                    src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2070&auto=format&fit=crop"
-                    alt="Dubai Skyline"
+                    src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=100&w=3840&auto=format&fit=crop"
+                    alt="Luxury Dubai Architecture"
                     fill
                     className="object-cover"
                   />
@@ -35,8 +35,8 @@ export function AboutSection() {
               transition={{ delay: 0.3 }}
               className="absolute -bottom-8 -left-8 bg-gold p-6 rounded-2xl shadow-2xl z-20 max-w-[240px]"
             >
-              <p className="text-emerald-950 font-bold text-3xl mb-1">10+</p>
-              <p className="text-emerald-950/70 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
+              <p className="text-slate-950 font-bold text-3xl mb-1">10+</p>
+              <p className="text-slate-950/70 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
                 Years of Excellence under CEO Abdul Wali Khaliq
               </p>
             </motion.div>
@@ -56,20 +56,18 @@ export function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-3xl md:text-4xl font-serif font-bold text-emerald-950 mb-6"
+              className="text-3xl md:text-4xl font-serif font-bold text-slate-950 mb-6"
             >
-              Your Trusted Partner <span className="italic text-gold">Beyond</span> Walls
+              Curating Dubai&apos;s Most <span className="italic text-gold">Exclusive</span> Addresses
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-emerald-950/60 text-base mb-8 leading-relaxed"
+              className="text-slate-950/70 text-base mb-8 leading-relaxed font-light"
             >
-              At COMAKE HOMES, led by our CEO Abdul Wali Khaliq, we redefine the 
-              Dubai real estate experience. We are more than just agents; we are your 
-              strategic partners in navigating the world&apos;s most dynamic property market.
+              Under the visionary leadership of our CEO, Abdul Wali Khaliq, COMAKE HOMES has established itself as the premier advisory for ultra-luxury real estate in Dubai. We provide discerning global investors with unparalleled access to off-market penthouses, waterfront villas, and high-yield strategic assets, ensuring discretion and exceptional returns at every step.
             </motion.p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
@@ -88,7 +86,7 @@ export function AboutSection() {
                   className="flex items-center space-x-2"
                 >
                   <CheckCircle2 className="text-gold w-4 h-4 shrink-0" />
-                  <span className="text-emerald-950 font-bold text-xs">
+                  <span className="text-slate-950 font-bold text-xs">
                     {item}
                   </span>
                 </motion.div>
@@ -102,7 +100,7 @@ export function AboutSection() {
               transition={{ delay: 0.5 }}
             >
               <Link href="/contact">
-                <Button className="bg-emerald-950 hover:bg-emerald-900 text-white font-bold rounded-full px-8 py-5 h-auto tracking-widest text-xs transition-transform active:scale-95">
+                <Button className="bg-slate-950 hover:bg-slate-900 text-white font-bold rounded-full px-8 py-5 h-auto tracking-widest text-xs transition-transform active:scale-95">
                   CONNECT WITH OUR EXPERTS
                 </Button>
               </Link>

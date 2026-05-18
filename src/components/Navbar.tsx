@@ -59,7 +59,7 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled || !isHomePage
-          ? "bg-emerald-950/98 backdrop-blur-md py-4 shadow-lg"
+          ? "bg-slate-950/98 backdrop-blur-md py-4 shadow-lg"
           : "bg-transparent py-6",
       )}
     >
@@ -99,7 +99,7 @@ export function Navbar() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[500px] bg-emerald-950/98 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-2xl"
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[500px] bg-slate-950/98 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-2xl"
                   >
                     <div className="grid grid-cols-2 gap-12">
                       {item.megaMenu.map((category) => (
@@ -141,7 +141,7 @@ export function Navbar() {
             </a>
           </div>
           <Link href="/contact">
-            <Button className="bg-gold hover:bg-gold/90 text-emerald-950 font-bold rounded-full px-5 py-3 h-auto text-[9px] tracking-widest transition-all hover:scale-105 active:scale-95">
+            <Button className="bg-gold hover:bg-gold/90 text-slate-950 font-bold rounded-full px-5 py-3 h-auto text-[9px] tracking-widest transition-all hover:scale-105 active:scale-95">
               GET CONSULTATION
             </Button>
           </Link>
@@ -167,7 +167,7 @@ export function Navbar() {
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
-            className="lg:hidden fixed inset-0 bg-emerald-950 z-40 pt-24 px-8"
+            className="lg:hidden fixed inset-0 bg-slate-950 z-40 pt-24 px-8"
           >
             <nav className="flex flex-col space-y-8">
               {NAV_ITEMS.map((item) => (
@@ -183,7 +183,7 @@ export function Navbar() {
               ))}
               <div className="pt-8 border-t border-white/10">
                 <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="bg-gold text-emerald-950 font-bold w-full py-8 text-lg rounded-full tracking-widest">
+                  <Button className="bg-gold text-slate-950 font-bold w-full py-8 text-lg rounded-full tracking-widest">
                     GET CONSULTATION
                   </Button>
                 </Link>

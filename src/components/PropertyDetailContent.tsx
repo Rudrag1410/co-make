@@ -60,20 +60,20 @@ export function PropertyDetailContent({ property }: { property: Property }) {
           {/* Main Info */}
           <div className="lg:col-span-2">
             <div className="flex flex-wrap items-center gap-3 mb-6">
-              <span className="bg-emerald-950 text-gold text-[9px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">
+              <span className="bg-slate-950 text-gold text-[9px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">
                 {property.category}
               </span>
-              <span className="bg-gold/10 text-emerald-950 text-[9px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">
+              <span className="bg-gold/10 text-slate-950 text-[9px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">
                 Handover {property.handoverYear}
               </span>
             </div>
 
             <div className="flex justify-between items-start mb-8">
               <div>
-                <h1 className="text-4xl md:text-5xl font-serif font-bold text-emerald-950 mb-4">
+                <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-950 mb-4">
                   {property.title}
                 </h1>
-                <div className="flex items-center space-x-2 text-emerald-950/60 font-bold text-[11px] uppercase tracking-widest">
+                <div className="flex items-center space-x-2 text-slate-950/60 font-bold text-[11px] uppercase tracking-widest">
                   <MapPin className="w-4 h-4 text-gold" />
                   <span>{property.location.title}, Dubai</span>
                 </div>
@@ -82,14 +82,14 @@ export function PropertyDetailContent({ property }: { property: Property }) {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full border-emerald-950/10 text-emerald-950 hover:bg-emerald-950 hover:text-white"
+                  className="rounded-full border-slate-950/10 text-slate-950 hover:bg-slate-950 hover:text-white"
                 >
                   <Share2 className="w-4 h-4" />
                 </Button>
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full border-emerald-950/10 text-emerald-950 hover:bg-emerald-950 hover:text-white"
+                  className="rounded-full border-slate-950/10 text-slate-950 hover:bg-slate-950 hover:text-white"
                 >
                   <Heart className="w-4 h-4" />
                 </Button>
@@ -97,9 +97,9 @@ export function PropertyDetailContent({ property }: { property: Property }) {
             </div>
 
             {/* Quick Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y border-emerald-950/5 mb-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y border-slate-950/5 mb-10">
               <div className="space-y-1">
-                <p className="text-[9px] font-bold uppercase tracking-widest text-emerald-950/40">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-slate-950/40">
                   Developer
                 </p>
                 <div className="flex items-center space-x-2">
@@ -110,13 +110,13 @@ export function PropertyDetailContent({ property }: { property: Property }) {
                     height={24}
                     className="w-6 h-6 object-contain"
                   />
-                  <p className="text-xs font-bold text-emerald-950 uppercase">
+                  <p className="text-xs font-bold text-slate-950 uppercase">
                     {property.developer.name}
                   </p>
                 </div>
               </div>
               <div className="space-y-1">
-                <p className="text-[9px] font-bold uppercase tracking-widest text-emerald-950/40">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-slate-950/40">
                   ROI Est.
                 </p>
                 <p className="text-xs font-bold text-gold uppercase">
@@ -124,18 +124,18 @@ export function PropertyDetailContent({ property }: { property: Property }) {
                 </p>
               </div>
               <div className="space-y-1">
-                <p className="text-[9px] font-bold uppercase tracking-widest text-emerald-950/40">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-slate-950/40">
                   Property Type
                 </p>
-                <p className="text-xs font-bold text-emerald-950 uppercase">
+                <p className="text-xs font-bold text-slate-950 uppercase">
                   {property.typeOfProperty.join(", ")}
                 </p>
               </div>
               <div className="space-y-1">
-                <p className="text-[9px] font-bold uppercase tracking-widest text-emerald-950/40">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-slate-950/40">
                   Bedrooms
                 </p>
-                <p className="text-xs font-bold text-emerald-950 uppercase">
+                <p className="text-xs font-bold text-slate-950 uppercase">
                   {property.bedrooms.join(", ")} BR
                 </p>
               </div>
@@ -143,24 +143,24 @@ export function PropertyDetailContent({ property }: { property: Property }) {
 
             {/* Description */}
             <div className="mb-12">
-              <h3 className="text-xl font-serif font-bold text-emerald-950 mb-6 underline decoration-gold/30 underline-offset-8">
+              <h3 className="text-xl font-serif font-bold text-slate-950 mb-6 underline decoration-gold/30 underline-offset-8">
                 Project Overview
               </h3>
-              <p className="text-emerald-950/70 leading-relaxed text-sm whitespace-pre-wrap">
+              <p className="text-slate-950/70 leading-relaxed text-sm whitespace-pre-wrap">
                 {property.description}
               </p>
             </div>
 
             {/* Amenities */}
             <div className="mb-12">
-              <h3 className="text-xl font-serif font-bold text-emerald-950 mb-8">
+              <h3 className="text-xl font-serif font-bold text-slate-950 mb-8">
                 Premium <span className="italic text-gold">Amenities</span>
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {property.amenities.map((amenity) => (
                   <div
                     key={amenity._id}
-                    className="flex flex-col items-center p-6 bg-offwhite rounded-3xl border border-emerald-950/5 group hover:border-gold/30 transition-all"
+                    className="flex flex-col items-center p-6 bg-offwhite rounded-3xl border border-slate-950/5 group hover:border-gold/30 transition-all"
                   >
                     <Image
                       src={amenity.icon}
@@ -169,7 +169,7 @@ export function PropertyDetailContent({ property }: { property: Property }) {
                       height={32}
                       className="w-8 h-8 mb-4 opacity-70 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0"
                     />
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-950/60 text-center">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-950/60 text-center">
                       {amenity.name}
                     </span>
                   </div>
@@ -180,7 +180,7 @@ export function PropertyDetailContent({ property }: { property: Property }) {
 
           {/* Sidebar / Form */}
           <div className="lg:col-span-1">
-            <div className="sticky top-28 bg-emerald-950 p-8 rounded-[2.5rem] shadow-2xl text-white">
+            <div className="sticky top-28 bg-slate-950 p-8 rounded-[2.5rem] shadow-2xl text-white">
               <div className="mb-8">
                 <p className="text-gold text-[10px] font-bold uppercase tracking-widest mb-2">
                   Starting Price
@@ -218,7 +218,7 @@ export function PropertyDetailContent({ property }: { property: Property }) {
               </div>
 
               <div className="space-y-4">
-                <Button className="w-full bg-gold hover:bg-gold/90 text-emerald-950 font-bold rounded-full py-6 text-xs uppercase tracking-widest">
+                <Button className="w-full bg-gold hover:bg-gold/90 text-slate-950 font-bold rounded-full py-6 text-xs uppercase tracking-widest">
                   BOOK A VIEWING
                 </Button>
               </div>
@@ -232,7 +232,7 @@ export function PropertyDetailContent({ property }: { property: Property }) {
                   placeholder="Your Phone Number"
                   className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-6 text-xs text-white placeholder:text-white/20 focus:outline-none focus:border-gold mb-4"
                 />
-                <Button className="w-full bg-white/10 hover:bg-gold hover:text-emerald-950 text-white border border-white/10 font-bold rounded-full py-3 text-[10px] uppercase tracking-widest transition-all">
+                <Button className="w-full bg-white/10 hover:bg-gold hover:text-slate-950 text-white border border-white/10 font-bold rounded-full py-3 text-[10px] uppercase tracking-widest transition-all">
                   SUBMIT INQUIRY
                 </Button>
               </div>

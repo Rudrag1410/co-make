@@ -23,16 +23,16 @@ export function PropertyCard({ property }: { property: Property }) {
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-transparent opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
 
           <div className="absolute top-4 left-4">
-            <span className="bg-emerald-950/80 backdrop-blur-md text-gold text-[8px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+            <span className="bg-slate-950/80 backdrop-blur-md text-gold text-[8px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
               {property.category}
             </span>
           </div>
 
           <div className="absolute top-4 right-4">
-            <div className="bg-gold text-emerald-950 text-[8px] font-bold px-3 py-1 rounded-full uppercase tracking-widest flex items-center space-x-1">
+            <div className="bg-gold text-slate-950 text-[8px] font-bold px-3 py-1 rounded-full uppercase tracking-widest flex items-center space-x-1">
               <TrendingUp className="w-3 h-3" />
               <span>ROI {property.ROI.min}%+</span>
             </div>
@@ -53,12 +53,12 @@ export function PropertyCard({ property }: { property: Property }) {
       </Link>
 
       <div className="px-2">
-        <div className="flex items-center justify-between mb-4 pb-4 border-b border-emerald-950/5">
+        <div className="flex items-center justify-between mb-4 pb-4 border-b border-slate-950/5">
           <div>
-            <p className="text-emerald-950/40 text-[8px] font-bold uppercase tracking-widest mb-1">
+            <p className="text-slate-950/40 text-[8px] font-bold uppercase tracking-widest mb-1">
               Starting Price
             </p>
-            <p className="text-emerald-950 text-sm font-bold">
+            <p className="text-slate-950 text-sm font-bold">
               AED{" "}
               {property.startingPrice > 0
                 ? property.startingPrice.toLocaleString()
@@ -66,10 +66,10 @@ export function PropertyCard({ property }: { property: Property }) {
             </p>
           </div>
           <div className="text-right">
-            <p className="text-emerald-950/40 text-[8px] font-bold uppercase tracking-widest mb-1">
+            <p className="text-slate-950/40 text-[8px] font-bold uppercase tracking-widest mb-1">
               Handover
             </p>
-            <p className="text-emerald-950 text-sm font-bold">
+            <p className="text-slate-950 text-sm font-bold">
               {property.handoverYear}
             </p>
           </div>
@@ -77,7 +77,7 @@ export function PropertyCard({ property }: { property: Property }) {
 
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 rounded bg-emerald-950/5 p-1">
+            <div className="w-6 h-6 rounded bg-slate-950/5 p-1">
               <Image
                 src={property.developer.logo}
                 alt={property.developer.name}
@@ -86,13 +86,13 @@ export function PropertyCard({ property }: { property: Property }) {
                 className="w-full h-full object-contain"
               />
             </div>
-            <span className="text-emerald-950/60 text-[9px] font-bold uppercase tracking-widest">
+            <span className="text-slate-950/60 text-[9px] font-bold uppercase tracking-widest">
               {property.developer.name}
             </span>
           </div>
           <Link
             href={`/listings/${property._id}`}
-            className="flex items-center space-x-2 text-emerald-950 group/btn"
+            className="flex items-center space-x-2 text-slate-950 group/btn"
           >
             <span className="text-[9px] font-bold uppercase tracking-widest group-hover/btn:mr-2 transition-all">
               Discover

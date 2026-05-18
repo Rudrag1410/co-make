@@ -19,14 +19,14 @@ export function PopularAreas({ areas = [] }: { areas?: Area[] }) {
             <p className="text-gold font-bold uppercase tracking-[0.2em] text-[8px] mb-2">
               Prestigious Locations
             </p>
-            <h2 className="text-2xl md:text-4xl font-serif font-bold text-emerald-950 leading-tight">
+            <h2 className="text-2xl md:text-4xl font-serif font-bold text-slate-950 leading-tight">
               Explore Dubai&apos;s Most <br />
               <span className="italic text-gold">Elite</span> Neighborhoods
             </h2>
           </div>
           <Link
             href="/areas"
-            className="group flex items-center space-x-2 text-emerald-950 font-bold"
+            className="group flex items-center space-x-2 text-slate-950 font-bold"
           >
             <span className="border-b border-gold pb-0.5 text-[9px] uppercase tracking-widest group-hover:pr-4 transition-all">
               VIEW ALL AREAS
@@ -75,7 +75,7 @@ function AreaCard({ area, className }: { area: Area; className?: string }) {
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
 
         <div className="absolute bottom-5 left-5 right-5">
           <h3 className="text-lg md:text-xl font-serif text-white font-bold mb-1.5 transition-transform group-hover:-translate-y-1">
@@ -85,7 +85,7 @@ function AreaCard({ area, className }: { area: Area; className?: string }) {
             <span className="text-white text-[8px] font-bold uppercase tracking-widest border-b border-gold pb-0.5">
               Explore
             </span>
-            <div className="w-7 h-7 rounded-full bg-gold flex items-center justify-center text-emerald-950">
+            <div className="w-7 h-7 rounded-full bg-gold flex items-center justify-center text-slate-950">
               <ArrowUpRight className="w-3.5 h-3.5" />
             </div>
           </div>

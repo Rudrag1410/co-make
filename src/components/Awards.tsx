@@ -12,7 +12,7 @@ const AWARDS = [
 
 export function Awards() {
   return (
-    <section className="py-12 bg-emerald-950 text-white overflow-hidden">
+    <section className="py-12 bg-slate-950 text-white overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="max-w-xl">

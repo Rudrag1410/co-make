@@ -31,11 +31,11 @@
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
 
-  --color-emerald: #0E3B2E;
-  --color-gold: #C89B3C;
-  --color-gold-light: #F2D38A;
+  --color-gold: #D4AF37;
+  --color-gold-light: #F3E5AB;
   --color-offwhite: #FAFAF7;
   --color-charcoal: #111111;
+  --color-slate-950: #020617;
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);

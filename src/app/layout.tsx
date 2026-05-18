@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Outfit, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ScrollToTop } from "@/components/providers/ScrollToTop";
 import Script from "next/script";
 
-const inter = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans",
 });
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-serif",
 });
 
 export const metadata: Metadata = {
@@ -30,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${playfair.variable} font-sans antialiased`}
+        className={`${outfit.variable} ${cormorant.variable} font-sans antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -57,7 +58,7 @@ export default function RootLayout({
               "label": "Comake Homes",
               "welcomeText": "Hello! How can we help you find your perfect luxury property in Dubai?",
               "messageText": "Speak with an Expert",
-              "backgroundColor": "#09533f",
+              "backgroundColor": "#0F172A",
               "textColor": "#c89b3c",
               "icon": "whatsappLogo"
             });

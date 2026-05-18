@@ -28,10 +28,10 @@ export default async function ListingsPage(props: {
       <Navbar />
       
       {/* Page Header - Removed pt-24 gap and reduced font sizes */}
-      <section className="bg-emerald-950 pt-28 pb-16 text-center relative overflow-hidden">
+      <section className="bg-slate-950 pt-28 pb-16 text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <Image 
-            src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2070&auto=format&fit=crop" 
+            src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=100&w=3840&auto=format&fit=crop" 
             alt="Dubai" 
             fill
             className="object-cover"
@@ -54,14 +54,14 @@ export default async function ListingsPage(props: {
       {/* Results Section - Reduced padding */}
       <section className="py-16">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 pb-4 border-b border-emerald-950/5">
-            <p className="text-emerald-950/40 text-[9px] font-bold uppercase tracking-widest">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 pb-4 border-b border-slate-950/5">
+            <p className="text-slate-950/40 text-[9px] font-bold uppercase tracking-widest">
               {properties.length} Exceptional Projects
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <span className="text-emerald-950 text-[9px] font-bold uppercase tracking-widest border-b-2 border-gold cursor-pointer">All Projects</span>
-              <span className="text-emerald-950/30 text-[9px] font-bold uppercase tracking-widest hover:text-emerald-950 cursor-pointer transition-colors">Off-Plan</span>
-              <span className="text-emerald-950/30 text-[9px] font-bold uppercase tracking-widest hover:text-emerald-950 cursor-pointer transition-colors">Ready</span>
+              <span className="text-slate-950 text-[9px] font-bold uppercase tracking-widest border-b-2 border-gold cursor-pointer">All Projects</span>
+              <span className="text-slate-950/30 text-[9px] font-bold uppercase tracking-widest hover:text-slate-950 cursor-pointer transition-colors">Off-Plan</span>
+              <span className="text-slate-950/30 text-[9px] font-bold uppercase tracking-widest hover:text-slate-950 cursor-pointer transition-colors">Ready</span>
             </div>
           </div>
 
@@ -73,7 +73,7 @@ export default async function ListingsPage(props: {
           
           {properties.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-emerald-950/40 font-serif text-xl italic">No properties found at this moment.</p>
+              <p className="text-slate-950/40 font-serif text-xl italic">No properties found at this moment.</p>
             </div>
           )}
         </div>

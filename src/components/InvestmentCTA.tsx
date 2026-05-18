@@ -12,9 +12,9 @@ export function InvestmentCTA() {
     <section className="py-16 relative overflow-hidden">
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-emerald-950/90 z-10" />
+        <div className="absolute inset-0 bg-slate-950/90 z-10" />
         <Image
-          src="https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5?q=80&w=2070&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5?q=100&w=3840&auto=format&fit=crop"
           alt="Dubai Skyline Night"
           fill
           className="object-cover"
@@ -95,7 +95,7 @@ export function InvestmentCTA() {
             className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
           >
             <Link href="/contact" className="w-full sm:w-auto">
-              <Button className="bg-gold hover:bg-gold/90 text-emerald-950 font-bold rounded-full px-8 py-6 h-auto tracking-widest text-xs w-full sm:w-auto">
+              <Button className="bg-gold hover:bg-gold/90 text-slate-950 font-bold rounded-full px-8 py-6 h-auto tracking-widest text-xs w-full sm:w-auto">
                 GET INVESTOR GUIDE
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>

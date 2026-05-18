@@ -7,7 +7,7 @@ export default function AreasLoading() {
   return (
     <main className="min-h-screen pt-20 bg-white">
       {/* Hero Skeleton */}
-      <section className="relative py-16 bg-emerald-950 overflow-hidden">
+      <section className="relative py-16 bg-slate-950 overflow-hidden">
         <div className="container mx-auto px-6 text-center">
           <Skeleton className="h-4 w-32 mx-auto mb-4 bg-white/10" />
           <Skeleton className="h-12 w-3/4 mx-auto mb-6 bg-white/10" />

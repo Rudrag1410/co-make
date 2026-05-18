@@ -29,17 +29,17 @@ export function AreasListing({ areas = [] }: { areas?: Area[] }) {
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
                   <div className="absolute bottom-6 left-6 right-6">
                     <h3 className="text-xl font-serif text-white font-bold group-hover:text-gold transition-colors">
                       {area.title}
                     </h3>
                   </div>
                 </div>
-                <p className="text-emerald-950/60 text-xs leading-relaxed mb-3 line-clamp-2">
+                <p className="text-slate-950/60 text-xs leading-relaxed mb-3 line-clamp-2">
                   {area.metaDescription || area.aboutArea}
                 </p>
-                <div className="flex items-center space-x-2 text-emerald-950 font-bold text-[10px] uppercase tracking-widest group-hover:text-gold transition-colors">
+                <div className="flex items-center space-x-2 text-slate-950 font-bold text-[10px] uppercase tracking-widest group-hover:text-gold transition-colors">
                   <span>Discover More</span>
                   <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
                 </div>

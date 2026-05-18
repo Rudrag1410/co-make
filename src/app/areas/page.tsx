@@ -13,11 +13,11 @@ export default async function AreasPage() {
       <Navbar />
       
       {/* Hero Section - Removed gap, added bg image */}
-      <section className="relative pt-28 pb-16 bg-emerald-950 overflow-hidden">
+      <section className="relative pt-28 pb-16 bg-slate-950 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-emerald-950/60 z-10" />
+          <div className="absolute inset-0 bg-slate-950/60 z-10" />
           <Image 
-            src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2070&auto=format&fit=crop" 
+            src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=100&w=3840&auto=format&fit=crop" 
             alt="Dubai Skyline" 
             fill
             className="object-cover opacity-40"

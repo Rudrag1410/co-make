@@ -15,9 +15,9 @@ import {
 import CountUp from "react-countup";
 
 const propertyImages = [
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=100&w=3840&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=100&w=3840&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=100&w=3840&auto=format&fit=crop",
 ];
 
 export function Hero() {
@@ -56,10 +56,10 @@ export function Hero() {
     >
       {/* Background with cinematic overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-emerald-950/40 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/80 via-transparent to-emerald-950 z-10" />
+        <div className="absolute inset-0 bg-slate-950/40 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-transparent to-slate-950 z-10" />
         <Image
-          src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2070&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=100&w=3840&auto=format&fit=crop"
           alt="Dubai Skyline"
           fill
           className="object-cover"
@@ -105,12 +105,12 @@ export function Hero() {
               {/* Image Thumbnail */}
               <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0">
                 <Image
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=100&w=3840&auto=format&fit=crop"
                   alt="Featured Property"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-emerald-950/20 group-hover:bg-transparent transition-colors" />
+                <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors" />
               </div>
 
               {/* Content */}
@@ -141,7 +141,7 @@ export function Hero() {
                   onClick={() => setIsGalleryOpen(true)}
                   className="flex flex-col items-center justify-center space-y-1 group/btn"
                 >
-                  <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold group-hover/btn:bg-gold group-hover/btn:text-emerald-950 transition-all duration-500">
+                  <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold group-hover/btn:bg-gold group-hover/btn:text-slate-950 transition-all duration-500">
                     <ImageIcon className="w-5 h-5" />
                   </div>
                   <span className="text-[8px] font-bold uppercase tracking-widest text-white/40 group-hover/btn:text-gold transition-colors">
@@ -179,7 +179,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-emerald-950/95 backdrop-blur-2xl"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/95 backdrop-blur-2xl"
           >
             {/* Close Button */}
             <button

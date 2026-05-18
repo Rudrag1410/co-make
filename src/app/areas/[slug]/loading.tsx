@@ -7,18 +7,18 @@ export default function AreaDetailLoading() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Skeleton */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-emerald-950/20">
+      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-slate-950/20">
         <div className="container mx-auto px-6 text-center">
-          <Skeleton className="h-4 w-32 mx-auto mb-4 bg-emerald-950/10" />
-          <Skeleton className="h-16 w-1/2 mx-auto mb-8 bg-emerald-950/10" />
-          <Skeleton className="h-4 w-40 mx-auto bg-emerald-950/10" />
+          <Skeleton className="h-4 w-32 mx-auto mb-4 bg-slate-950/10" />
+          <Skeleton className="h-16 w-1/2 mx-auto mb-8 bg-slate-950/10" />
+          <Skeleton className="h-4 w-40 mx-auto bg-slate-950/10" />
         </div>
       </section>
 
       {/* Stats Skeleton */}
       <section className="relative z-20 -mt-12">
         <div className="container mx-auto px-6">
-          <div className="bg-white p-10 rounded-[2rem] shadow-2xl border border-emerald-950/5 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="bg-white p-10 rounded-[2rem] shadow-2xl border border-slate-950/5 grid grid-cols-2 md:grid-cols-4 gap-6">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="text-center">
                 <Skeleton className="h-8 w-16 mx-auto mb-2" />
