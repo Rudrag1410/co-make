@@ -661,6 +661,7 @@ export function ExclusiveLaunches() {
               >
                 {activeProject.gallery[activeGalleryIndex].endsWith(".mp4") ? (
                   <video
+                    key={activeProject.gallery[activeGalleryIndex]}
                     autoPlay
                     muted
                     loop

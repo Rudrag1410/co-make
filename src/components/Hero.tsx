@@ -299,14 +299,16 @@ export function Hero() {
               <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-black">
                 {propertyImages[currentImg].endsWith(".mp4") ? (
                   <video
-                    src={propertyImages[currentImg]}
+                    key={propertyImages[currentImg]}
                     autoPlay
                     muted
                     loop
                     playsInline
                     controls
                     className="w-full h-full object-contain"
-                  />
+                  >
+                    <source src={propertyImages[currentImg]} type="video/mp4" />
+                  </video>
                 ) : (
                   <Image
                     src={propertyImages[currentImg]}
