@@ -88,14 +88,16 @@ export function Hero() {
 
         {/* Native, high-performance HTML5 Video Element (Absolutely NO controls, loops natively, and plays instantly!) */}
         <video
-          src="/video/dubai_best_moment.mp4"
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
           className="hero-video-bg absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0 transition-transform duration-700"
           style={{ pointerEvents: "none", transform: "scale(1.02)" }}
-        />
+        >
+          <source src="/video/dubai_best_moment.mp4" type="video/mp4" />
+        </video>
       </div>
 
       <div className="container mx-auto px-6 relative z-20 text-center select-none">
@@ -143,13 +145,15 @@ export function Hero() {
               {/* Autoplay Video Thumbnail for Greenz */}
               <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 border border-gold/20">
                 <video
-                  src="/video/greenz_danube.mp4"
                   autoPlay
                   muted
                   loop
                   playsInline
+                  preload="none"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
+                >
+                  <source src="/video/greenz_danube.mp4" type="video/mp4" />
+                </video>
                 <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors" />
               </div>
 

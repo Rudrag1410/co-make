@@ -253,13 +253,15 @@ export function ExclusiveLaunches() {
               <div className="relative w-full md:w-3/5 h-80 md:h-auto min-h-[350px] overflow-hidden">
                 {launch.video ? (
                   <video
-                    src={launch.video}
                     autoPlay
                     muted
                     loop
                     playsInline
+                    preload="none"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                  />
+                  >
+                    <source src={launch.video} type="video/mp4" />
+                  </video>
                 ) : (
                   <Image
                     src={launch.image!}
@@ -659,14 +661,16 @@ export function ExclusiveLaunches() {
               >
                 {activeProject.gallery[activeGalleryIndex].endsWith(".mp4") ? (
                   <video
-                    src={activeProject.gallery[activeGalleryIndex]}
                     autoPlay
                     muted
                     loop
                     playsInline
                     controls
+                    preload="auto"
                     className="w-full h-full object-contain"
-                  />
+                  >
+                    <source src={activeProject.gallery[activeGalleryIndex]} type="video/mp4" />
+                  </video>
                 ) : (
                   <Image
                     src={activeProject.gallery[activeGalleryIndex]}
