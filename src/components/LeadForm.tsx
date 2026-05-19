@@ -121,10 +121,10 @@ export function LeadForm() {
                       <item.icon className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="text-slate-950/40 text-[8px] uppercase font-bold tracking-widest">
+                      <p className="text-slate-950/45 text-[10px] uppercase font-bold tracking-[0.18em] mb-0.5">
                         {item.title}
                       </p>
-                      <p className="text-slate-950 text-sm font-bold group-hover:text-gold transition-colors">
+                      <p className="text-slate-950 text-[15px] font-semibold tracking-wide group-hover:text-gold transition-colors">
                         {item.value}
                       </p>
                     </div>
@@ -270,6 +270,32 @@ export function LeadForm() {
                 </p>
               </form>
             </Form>
+          </motion.div>
+        </div>
+
+        {/* Modon Interactive 3D Map - Short Footer Size */}
+        <div className="mt-20">
+          <div className="flex items-center space-x-3 mb-6">
+            <span className="bg-gold/15 border border-gold/30 text-gold text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">
+              Interactive Map
+            </span>
+            <span className="text-slate-950 font-serif text-lg font-bold">
+              Explore Modon World
+            </span>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="w-full rounded-[2rem] overflow-hidden border border-slate-950/10 shadow-[0_20px_60px_rgba(0,0,0,0.15)] bg-slate-950 relative"
+          >
+            <iframe
+              src="https://world.modon.com/abu-dhabi/"
+              className="w-full h-[350px] md:h-[400px] border-none"
+              title="Modon Interactive Real Estate Map"
+              allowFullScreen
+              loading="lazy"
+            />
           </motion.div>
         </div>
       </div>

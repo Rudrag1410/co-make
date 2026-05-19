@@ -3,7 +3,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, TrendingUp, ShieldCheck, Globe } from "lucide-react";
 
@@ -94,15 +93,23 @@ export function InvestmentCTA() {
             transition={{ delay: 0.6 }}
             className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
           >
-            <Link href="/contact" className="w-full sm:w-auto">
-              <Button className="bg-gold hover:bg-gold/90 text-slate-950 font-bold rounded-full px-8 py-6 h-auto tracking-widest text-xs w-full sm:w-auto">
-                GET INVESTOR GUIDE
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </Link>
-            <Button className="bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md font-bold rounded-full px-8 py-6 h-auto tracking-widest text-xs w-full sm:w-auto">
-              WHATSAPP US
+            <Button
+              onClick={() => window.dispatchEvent(new Event("open-inquiry-popup"))}
+              className="bg-gold hover:bg-gold/90 text-slate-950 font-bold rounded-full px-8 py-6 h-auto tracking-widest text-xs w-full sm:w-auto"
+            >
+              GET INVESTOR GUIDE
+              <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
+            <a
+              href="https://api.whatsapp.com/send?phone=971581161051&text=Hi%20there%2C%20I%20am%20interested%20in%20Dubai%20Luxury%20Market%20investment."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
+            >
+              <Button className="bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md font-bold rounded-full px-8 py-6 h-auto tracking-widest text-xs w-full">
+                WHATSAPP US
+              </Button>
+            </a>
           </motion.div>
         </div>
       </div>

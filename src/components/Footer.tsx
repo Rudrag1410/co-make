@@ -11,11 +11,11 @@ export function Footer() {
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-3">
               <Image
-                src="/logo.png"
+                src="/comake-home-logo.png"
                 alt="Comake Homes"
-                width={208}
-                height={60}
-                className="w-40 md:w-52 h-auto object-contain"
+                width={240}
+                height={70}
+                className="w-44 md:w-56 h-auto object-contain"
               />
             </Link>
             <p className="text-white/60 text-xs leading-relaxed max-w-xs">

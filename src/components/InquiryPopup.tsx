@@ -10,15 +10,26 @@ export function InquiryPopup() {
   const [hasSeen, setHasSeen] = useState(false);
 
   useEffect(() => {
-    // Only show once per session
+    // Listen for global custom trigger events to open the callback popup
+    const handleOpen = () => {
+      setIsOpen(true);
+      setHasSeen(true);
+    };
+    window.addEventListener("open-inquiry-popup", handleOpen);
+
+    // Only show once per session automatically
+    let timer: NodeJS.Timeout;
     if (!hasSeen) {
-      const timer = setTimeout(() => {
+      timer = setTimeout(() => {
         setIsOpen(true);
         setHasSeen(true);
       }, 5000); // 5 seconds
-
-      return () => clearTimeout(timer);
     }
+
+    return () => {
+      window.removeEventListener("open-inquiry-popup", handleOpen);
+      if (timer) clearTimeout(timer);
+    };
   }, [hasSeen]);
 
   return (
@@ -48,10 +59,10 @@ export function InquiryPopup() {
               <div className="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-3">
                 <Building className="w-6 h-6 text-gold" />
               </div>
-              <h3 className="text-white font-serif text-2xl font-bold mb-1 leading-tight">
-                Get a call within <br/> few seconds 📞
+              <h3 className="text-white font-sans text-2xl font-extrabold mb-1 leading-tight tracking-tight">
+                Get a call within <br /> few minutes 📞
               </h3>
-              <p className="text-gold text-[10px] uppercase tracking-widest font-bold mt-2">
+              <p className="text-gold text-[10px] uppercase tracking-widest font-extrabold mt-2">
                 Fast & Direct Assistance
               </p>
             </div>
@@ -62,7 +73,13 @@ export function InquiryPopup() {
                 Leave your number below and we will call you right away!
               </p>
 
-              <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsOpen(false); }}>
+              <form
+                className="space-y-4"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setIsOpen(false);
+                }}
+              >
                 <div>
                   <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 ml-1">
                     Full Name
@@ -86,7 +103,10 @@ export function InquiryPopup() {
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-gold hover:bg-gold-light text-slate-950 font-bold rounded-xl py-6 tracking-widest text-[10px] uppercase mt-2 group">
+                <Button
+                  type="submit"
+                  className="w-full bg-gold hover:bg-gold-light text-slate-950 font-bold rounded-xl py-6 tracking-widest text-[10px] uppercase mt-2 group"
+                >
                   REQUEST CALLBACK
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>

@@ -203,7 +203,7 @@ export function AreaDetailContent({
                         <span className="text-slate-950 text-xs font-bold">
                           AED{" "}
                           {property.startingPrice > 0
-                            ? property.startingPrice.toLocaleString()
+                            ? property.startingPrice.toLocaleString("en-US")
                             : "Contact Us"}
                         </span>
                       </div>

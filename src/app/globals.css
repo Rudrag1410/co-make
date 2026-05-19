@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-playfair), serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif), serif;
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -40,6 +40,7 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+
 }
 
 :root {
@@ -108,10 +109,62 @@
   .gold-gradient {
     background: linear-gradient(135deg, #C89B3C 0%, #F2D38A 50%, #C89B3C 100%);
   }
-}
+  }
 
 .cj-card {
   padding-top: 32px !important;
   padding-bottom: 32px !important;
   height: auto !important;
+}
+
+/* Bulletproof Infinite Scrolling Marquee */
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse 35s linear infinite;
+}
+
+/* Pause marquee scrolling on hover for enhanced user interactivity */
+.animate-marquee:hover,
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Hide header navigation and third-party chat/WhatsApp widgets during active lightbox preview */
+body.lightbox-open header,
+body.lightbox-open .duo-launcher,
+body.lightbox-open #duo-launcher,
+body.lightbox-open .duo-widget,
+body.lightbox-open #duo-widget,
+body.lightbox-open [class*="duo-"],
+body.lightbox-open [id*="duo-"],
+body.lightbox-open iframe[src*="duochat"] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  display: none !important;
 }

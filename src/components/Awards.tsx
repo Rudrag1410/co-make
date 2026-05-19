@@ -12,8 +12,12 @@ const AWARDS = [
 
 export function Awards() {
   return (
-    <section className="py-12 bg-slate-950 text-white overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section className="py-16 bg-slate-950 text-white overflow-hidden relative">
+      {/* Elegant ambient light glows */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full filter blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-slate-900/40 rounded-full filter blur-[100px] pointer-events-none" />
+
+      <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="max-w-xl">
             <motion.p
@@ -31,7 +35,8 @@ export function Awards() {
               transition={{ delay: 0.1 }}
               className="text-3xl md:text-4xl font-serif font-bold mb-6"
             >
-              A Legacy of <span className="italic text-gold">Success</span> & Recognition
+              A Legacy of <span className="italic text-gold">Success</span> &
+              Recognition
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -40,8 +45,9 @@ export function Awards() {
               transition={{ delay: 0.2 }}
               className="text-white/60 text-base mb-8 leading-relaxed"
             >
-              Our commitment to excellence has earned us top-tier partnerships 
-              with Dubai&apos;s most prestigious developers and numerous industry accolades.
+              Our commitment to excellence has earned us top-tier partnerships
+              with Dubai&apos;s most prestigious developers and numerous
+              industry accolades.
             </motion.p>
           </div>
 
@@ -53,13 +59,17 @@ export function Awards() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl text-center hover:bg-white/10 transition-all duration-500 group"
+                className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl text-center hover:bg-white/10 hover:border-gold/30 transition-all duration-500 group min-w-[160px]"
               >
                 <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">
                   {award.icon}
                 </div>
-                <h4 className="text-gold font-bold text-[10px] uppercase tracking-widest mb-1">{award.year}</h4>
-                <p className="text-white font-serif font-bold text-base leading-tight">{award.name}</p>
+                <h4 className="text-gold font-bold text-[10px] uppercase tracking-widest mb-1">
+                  {award.year}
+                </h4>
+                <p className="text-white font-serif font-bold text-base leading-tight">
+                  {award.name}
+                </p>
               </motion.div>
             ))}
           </div>

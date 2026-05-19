@@ -1,7 +1,9 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { PopularAreas } from "@/components/PopularAreas";
+import { BrandCarousel } from "@/components/BrandCarousel";
 import { TrendingProjects } from "@/components/TrendingProjects";
+import { ExclusiveLaunches } from "@/components/ExclusiveLaunches";
 import { AboutSection } from "@/components/AboutSection";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { Testimonials } from "@/components/Testimonials";
@@ -25,7 +27,9 @@ export default async function Home() {
       <Hero />
       <div className="relative z-10 bg-white">
         <PopularAreas areas={areas} />
+        <BrandCarousel />
         <TrendingProjects properties={properties} />
+        <ExclusiveLaunches />
         <AboutSection />
         <WhyChooseUs />
         <Testimonials />

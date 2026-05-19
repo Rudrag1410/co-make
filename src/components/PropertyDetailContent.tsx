@@ -188,7 +188,7 @@ export function PropertyDetailContent({ property }: { property: Property }) {
                 <h4 className="text-4xl font-serif font-bold mb-1">
                   AED{" "}
                   {property.startingPrice > 0
-                    ? property.startingPrice.toLocaleString()
+                    ? property.startingPrice.toLocaleString("en-US")
                     : "Contact Us"}
                 </h4>
                 <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest">

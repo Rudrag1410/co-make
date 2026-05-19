@@ -47,7 +47,18 @@ export const fetchAreas = cache(async (limit = 20): Promise<Area[]> => {
       next: { revalidate: 3600 },
     });
     const json = await res.json();
-    return json.success ? (json.data.data || json.data.docs || []) : [];
+    const data: Area[] = json.success
+      ? json.data.data || json.data.docs || []
+      : [];
+    return data.map((area) => {
+      if (area.title.toLowerCase().includes("palm jebel ali")) {
+        return { ...area, mainImage: "/images/palm-jebel-ali.png" };
+      }
+      if (area.title.toLowerCase().includes("yas island")) {
+        return { ...area, mainImage: "/images/yas-island.png" };
+      }
+      return area;
+    });
   } catch (error) {
     console.error("Error fetching areas:", error);
     return [];
@@ -60,51 +71,67 @@ export const fetchAreaById = cache(async (id: string): Promise<Area | null> => {
       next: { revalidate: 3600 },
     });
     const json = await res.json();
-    return json.success ? json.data : null;
+    if (json.success && json.data) {
+      const area = json.data;
+      if (area.title.toLowerCase().includes("palm jebel ali")) {
+        return { ...area, mainImage: "/images/palm-jebel-ali.png" };
+      }
+      if (area.title.toLowerCase().includes("yas island")) {
+        return { ...area, mainImage: "/images/yas-island.png" };
+      }
+      return area;
+    }
+    return null;
   } catch (error) {
     console.error(`Error fetching area ${id}:`, error);
     return null;
   }
 });
 
-export const fetchProperties = cache(async (limit = 20): Promise<Property[]> => {
-  try {
-    const res = await fetch(`${API_BASE}/property?limit=${limit}`, {
-      next: { revalidate: 3600 },
-    });
-    const json = await res.json();
-    return json.success ? json.data : [];
-  } catch (error) {
-    console.error("Error fetching properties:", error);
-    return [];
-  }
-});
+export const fetchProperties = cache(
+  async (limit = 20): Promise<Property[]> => {
+    try {
+      const res = await fetch(`${API_BASE}/property?limit=${limit}`, {
+        next: { revalidate: 3600 },
+      });
+      const json = await res.json();
+      return json.success ? json.data : [];
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+      return [];
+    }
+  },
+);
 
-export const fetchPropertyById = cache(async (id: string): Promise<Property | null> => {
-  try {
-    const res = await fetch(`${API_BASE}/property/${id}`, {
-      next: { revalidate: 3600 },
-    });
-    const json = await res.json();
-    return json.success ? json.data : null;
-  } catch (error) {
-    console.error(`Error fetching property ${id}:`, error);
-    return null;
-  }
-});
+export const fetchPropertyById = cache(
+  async (id: string): Promise<Property | null> => {
+    try {
+      const res = await fetch(`${API_BASE}/property/${id}`, {
+        next: { revalidate: 3600 },
+      });
+      const json = await res.json();
+      return json.success ? json.data : null;
+    } catch (error) {
+      console.error(`Error fetching property ${id}:`, error);
+      return null;
+    }
+  },
+);
 
-export const fetchPropertiesByArea = cache(async (areaId: string): Promise<Property[]> => {
-  try {
-    const res = await fetch(`${API_BASE}/property?areaId=${areaId}`, {
-      next: { revalidate: 3600 },
-    });
-    const json = await res.json();
-    return json.success ? json.data : [];
-  } catch (error) {
-    console.error("Error fetching properties for area:", error);
-    return [];
-  }
-});
+export const fetchPropertiesByArea = cache(
+  async (areaId: string): Promise<Property[]> => {
+    try {
+      const res = await fetch(`${API_BASE}/property?areaId=${areaId}`, {
+        next: { revalidate: 3600 },
+      });
+      const json = await res.json();
+      return json.success ? json.data : [];
+    } catch (error) {
+      console.error("Error fetching properties for area:", error);
+      return [];
+    }
+  },
+);
 
 export function slugify(text: string): string {
   return text
