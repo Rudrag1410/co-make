@@ -14,7 +14,10 @@ import {
 } from "lucide-react";
 import CountUp from "react-countup";
 
-const propertyImages = ["/images/greenz_danube_payment plan.jpeg"];
+const propertyImages = [
+  "/video/greenz_danube.mp4",
+  "/images/greenz_danube_payment plan.jpeg",
+];
 
 export function Hero() {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
