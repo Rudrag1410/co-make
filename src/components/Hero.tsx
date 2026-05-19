@@ -16,6 +16,7 @@ import CountUp from "react-countup";
 
 const propertyImages = [
   "/video/greenz_danube.mp4",
+  "/video/WhatsApp Video 2026-05-19 at 13.04.29.mp4",
   "/images/greenz_danube_payment plan.jpeg",
 ];
 
