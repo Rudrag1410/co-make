@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight, Building } from "lucide-react";
+import { X, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 export function InquiryPopup() {
@@ -56,8 +57,15 @@ export function InquiryPopup() {
               >
                 <X className="w-5 h-5" />
               </button>
-              <div className="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Building className="w-6 h-6 text-gold" />
+              <div className="relative h-12 w-auto flex items-center justify-center mb-3">
+                <Image
+                  src="/comake-home-logo.png"
+                  alt="Co-Make Homes Logo"
+                  width={140}
+                  height={35}
+                  className="h-9 w-auto object-contain brightness-110"
+                  priority
+                />
               </div>
               <h3 className="text-white font-sans text-2xl font-extrabold mb-1 leading-tight tracking-tight">
                 Get a call within <br /> few minutes 📞
