@@ -10,21 +10,129 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
+  ChevronUp,
+  ChevronDown,
   ImageIcon,
+  Download,
 } from "lucide-react";
 import CountUp from "react-countup";
 
-const propertyImages = [
-  "/video/greenz_danube.mp4",
-  "/video/WhatsApp Video 2026-05-19 at 13.04.29.mp4",
-  "/images/greenz_danube_payment plan.jpeg",
+const SIGNATURE_PROJECTS = [
+  {
+    id: "danube-greenz",
+    developer: "DANUBE",
+    title: "Greenz by Danube",
+    subtitle: "Premium Villas & Townhouses",
+    location: "Academic City, Dubai • Starting AED 3.5M",
+    video: "/video/greenz_danube.mp4",
+    hasBrochure: true,
+    galleryAction: "hero-gallery",
+    pdfs: [
+      "/pdf/Greenz by Danube - Phase 1 Master Plan.pdf",
+      "/pdf/Greenz by Danube Electronic Advertisement Permit.pdf",
+      "/pdf/Greenz by Danube_Brochure new.pdf",
+      "/pdf/Greenz Updated Masterplan with 5bed price.pdf"
+    ],
+    galleryImages: [
+      "/video/greenz_danube.mp4",
+      "/video/WhatsApp Video 2026-05-19 at 13.04.29.mp4",
+      "/images/greenz_danube_payment plan.jpeg"
+    ]
+  },
+  {
+    id: "modon-golf-villas",
+    developer: "MODON",
+    title: "Hudayriyat Golf Estates",
+    subtitle: "Premium Golf Course Villas",
+    location: "Hudayriyat Island, Abu Dhabi • Starting AED 4.5M",
+    video: "/images/modon-1.mp4",
+    hasBrochure: false,
+    galleryAction: "modon-golf-gallery",
+    galleryImages: [
+      "/images/modon-1.mp4",
+      "/images/modon-2.mp4",
+      "/images/modon-3.mp4",
+      "/images/modon-4.mp4",
+      "/images/modon-5.mp4",
+      "/images/modon-6.mp4",
+      "/images/WhatsApp Image 2026-05-19 at 12.53.18 (1).jpeg"
+    ]
+  },
+  {
+    id: "modon-royal-residences",
+    developer: "MODON",
+    title: "Hudayriyat Golf Estates",
+    subtitle: "Royal Waterfront Residences",
+    location: "Hudayriyat Island, Abu Dhabi • Starting AED 6.5M",
+    video: "/images/modon-4.mp4",
+    hasBrochure: false,
+    galleryAction: "modon-royal-gallery",
+    galleryImages: [
+      "/images/modon-4.mp4",
+      "/images/modon-1.mp4",
+      "/images/modon-2.mp4",
+      "/images/modon-3.mp4",
+      "/images/modon-5.mp4",
+      "/images/modon-6.mp4",
+      "/images/WhatsApp Image 2026-05-19 at 12.53.18 (1).jpeg"
+    ]
+  }
 ];
 
 export function Hero() {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [currentImg, setCurrentImg] = useState(0);
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      setActiveProjectIndex((prev) => (prev + 1) % SIGNATURE_PROJECTS.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isHovered]);
+
+  useEffect(() => {
+    const handleSuccess = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const action = customEvent.detail?.action;
+      
+      const matchedProj = SIGNATURE_PROJECTS.find(p => p.galleryAction === action);
+      if (matchedProj) {
+        setGalleryImages(matchedProj.galleryImages);
+        setCurrentImg(0);
+        setIsGalleryOpen(true);
+      } else if (action === "hero-download" && customEvent.detail?.payload) {
+        const payload = customEvent.detail.payload;
+        if (payload.pdfs) {
+          payload.pdfs.forEach((pdfPath: string, index: number) => {
+            setTimeout(async () => {
+              try {
+                const response = await fetch(pdfPath);
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.setAttribute("download", pdfPath.split("/").pop() || "brochure.pdf");
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => window.URL.revokeObjectURL(url), 100);
+              } catch (err) {
+                console.error("Failed to download PDF", err);
+              }
+            }, index * 300);
+          });
+        }
+      }
+    };
+    window.addEventListener("inquiry-success", handleSuccess);
+    return () => window.removeEventListener("inquiry-success", handleSuccess);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -134,74 +242,204 @@ export function Hero() {
             opportunities in Dubai&apos;s most prestigious communities.
           </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            onClick={() => window.dispatchEvent(new Event("open-inquiry-popup"))}
-            className="max-w-xl mx-auto mb-16 relative group cursor-pointer"
-          >
-            {/* Glowing gold ambient outline background blur */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-gold/30 via-gold/10 to-gold/30 rounded-2xl blur opacity-25 group-hover:opacity-60 transition duration-700" />
+          <div className="relative max-w-xl mx-auto mb-20 flex items-center justify-center">
+            {/* The stacked card container */}
+            <div
+              className="relative w-full h-[128px] md:h-[160px] select-none"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              {/* Glowing gold ambient outline background blur behind the stack */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-gold/25 via-gold/5 to-gold/25 rounded-2xl blur-lg opacity-25 group-hover:opacity-50 transition duration-700 pointer-events-none z-0" />
 
-            {/* Main Interactive Luxury Glassmorphic Container */}
-            <div className="relative flex items-center bg-slate-950/50 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl overflow-hidden transition-all duration-500 transform group-hover:-translate-y-1.5 group-hover:border-gold/45 group-hover:bg-slate-950/70 group-hover:shadow-[0_25px_60px_rgba(200,155,60,0.22)]">
-              {/* Autoplay Video Thumbnail for Greenz */}
-              <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 border border-gold/20">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="none"
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                >
-                  <source src="/video/greenz_danube.mp4" type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors" />
-              </div>
+              {SIGNATURE_PROJECTS.map((project, idx) => {
+                // Calculate circular offset relative to activeProjectIndex
+                let diff = idx - activeProjectIndex;
+                if (diff === 2) diff = -1;
+                if (diff === -2) diff = 1;
 
-              {/* Content */}
-              <div className="ml-6 text-left flex-grow">
-                <div className="flex items-center space-x-2 mb-2">
-                  <Star className="w-3 h-3 text-gold fill-gold" />
-                  <span className="text-gold text-[9px] font-bold uppercase tracking-[0.2em]">
-                    Signature Collection
-                  </span>
-                </div>
-                <h3 className="text-white text-lg md:text-xl font-serif font-bold mb-1 leading-tight">
-                  Greenz by Danube <br />
-                  <span className="text-white/60 text-sm italic">
-                    Premium Villas & Townhouses
-                  </span>
-                </h3>
-                <div className="flex items-center text-white/40 space-x-2">
-                  <MapPin className="w-3 h-3 text-gold" />
-                  <span className="text-[10px] font-medium tracking-wide">
-                    Academic City, Dubai • Starting AED 3.5M
-                  </span>
-                </div>
-              </div>
+                const isActive = diff === 0;
 
-              {/* View Gallery Button */}
-              <div className="flex-shrink-0 ml-4">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsGalleryOpen(true);
-                  }}
-                  className="flex flex-col items-center justify-center space-y-1 group/btn"
-                >
-                  <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold group-hover/btn:bg-gold group-hover/btn:text-slate-950 transition-all duration-500">
-                    <ImageIcon className="w-5 h-5" />
-                  </div>
-                  <span className="text-[8px] font-bold uppercase tracking-widest text-white/40 group-hover/btn:text-gold transition-colors">
-                    Gallery
-                  </span>
-                </button>
-              </div>
+                return (
+                  <motion.div
+                    key={project.id}
+                    animate={{
+                      y: diff === 0 ? 0 : diff === 1 ? 16 : -16,
+                      scale: diff === 0 ? 1 : 0.94,
+                      opacity: diff === 0 ? 1 : 0.35,
+                      zIndex: diff === 0 ? 30 : diff === 1 ? 20 : 10,
+                      filter: diff === 0 ? "brightness(1) blur(0px)" : "brightness(0.55) blur(1.5px)",
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 280,
+                      damping: 24,
+                    }}
+                    onClick={(e) => {
+                      if (!isActive) {
+                        e.stopPropagation();
+                        setActiveProjectIndex(idx);
+                      } else {
+                        window.dispatchEvent(
+                          new CustomEvent("open-inquiry-popup", {
+                            detail: {
+                              action: `${project.developer.toLowerCase()}-callback`,
+                              payload: {
+                                developer: project.developer,
+                                title: project.title,
+                                name: project.subtitle
+                              }
+                            }
+                          })
+                        );
+                      }
+                    }}
+                    className={`absolute inset-0 w-full h-full flex items-center p-4 rounded-2xl border border-white/10 bg-slate-950/70 backdrop-blur-xl shadow-2xl transition-colors duration-500 ${
+                      isActive 
+                        ? "cursor-pointer border-gold/20 hover:border-gold/45 hover:bg-slate-950/85 hover:shadow-[0_25px_60px_rgba(200,155,60,0.22)]" 
+                        : "cursor-pointer hover:border-white/20 hover:bg-slate-950/80"
+                    }`}
+                  >
+                    {/* Glowing gold line running along the top of the active card */}
+                    {isActive && (
+                      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-gold/55 to-transparent rounded-t-2xl shadow-[0_1px_4px_rgba(212,175,55,0.4)] z-20" />
+                    )}
+
+                    {/* Click interception overlay for background cards to trigger selection cleanly */}
+                    {!isActive && (
+                      <div className="absolute inset-0 z-50 rounded-2xl cursor-pointer" />
+                    )}
+
+                    {/* Autoplay Video Thumbnail */}
+                    <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 border border-gold/25 bg-slate-900 z-10">
+                      <video
+                        key={project.video}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="none"
+                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      >
+                        <source src={project.video} type="video/mp4" />
+                      </video>
+                      <div className="absolute inset-0 bg-slate-950/20" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="ml-6 text-left flex-grow z-10">
+                      <div className="flex items-center space-x-2.5 mb-2">
+                        <Star className={`w-3 h-3 text-gold fill-gold ${isActive ? "animate-spin-slow" : ""}`} />
+                        <span className="text-gold text-[9px] font-bold uppercase tracking-[0.2em]">
+                          Signature Collection
+                        </span>
+                        {isActive && (
+                          <span className="text-white/40 text-[9px] font-bold tracking-wider font-sans bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">
+                            {idx + 1}/{SIGNATURE_PROJECTS.length}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-white text-lg md:text-xl font-serif font-bold mb-1 leading-tight">
+                        {project.title} <br />
+                        <span className="text-white/60 text-sm italic font-sans font-normal">
+                          {project.subtitle}
+                        </span>
+                      </h3>
+                      <div className="flex items-center text-white/40 space-x-2">
+                        <MapPin className="w-3 h-3 text-gold" />
+                        <span className="text-[10px] font-medium tracking-wide">
+                          {project.location}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons: Gallery & Brochure */}
+                    <div className="flex-shrink-0 ml-4 flex space-x-3 z-20 pointer-events-auto">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.dispatchEvent(
+                            new CustomEvent("open-inquiry-popup", {
+                              detail: {
+                                action: project.galleryAction,
+                                payload: {
+                                  developer: project.developer,
+                                  title: project.title
+                                }
+                              }
+                            })
+                          );
+                        }}
+                        className="flex flex-col items-center justify-center space-y-1 group/btn"
+                      >
+                        <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-slate-950 transition-all duration-500">
+                          <ImageIcon className="w-5 h-5" />
+                        </div>
+                        <span className="text-[8px] font-bold uppercase tracking-widest text-white/40 group-hover/btn:text-gold transition-colors">
+                          Gallery
+                        </span>
+                      </button>
+                      {project.hasBrochure && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.dispatchEvent(
+                              new CustomEvent("open-inquiry-popup", {
+                                detail: {
+                                  action: "hero-download",
+                                  payload: {
+                                    pdfs: project.pdfs,
+                                    developer: project.developer,
+                                    title: project.title
+                                  }
+                                }
+                              })
+                            );
+                          }}
+                          className="flex flex-col items-center justify-center space-y-1 group/btn"
+                        >
+                          <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-slate-950 transition-all duration-500">
+                            <Download className="w-5 h-5" />
+                          </div>
+                          <span className="text-[8px] font-bold uppercase tracking-widest text-white/40 group-hover/btn:text-gold transition-colors">
+                            Brochure
+                          </span>
+                        </button>
+                      )}
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
-          </motion.div>
+
+            {/* Up/Down Navigation Controls on the Right */}
+            <div className="absolute right-[-48px] md:right-[-64px] top-1/2 -translate-y-1/2 flex flex-col space-y-3.5 z-40">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveProjectIndex((prev) =>
+                    prev === 0 ? SIGNATURE_PROJECTS.length - 1 : prev - 1
+                  );
+                }}
+                className="w-10 h-10 rounded-full border border-gold/30 bg-slate-950/70 text-gold flex items-center justify-center backdrop-blur-md transition-all duration-300 hover:bg-gold hover:text-slate-950 hover:border-gold hover:scale-110 shadow-lg hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] cursor-pointer"
+                title="Previous Project"
+              >
+                <ChevronUp className="w-5 h-5" />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveProjectIndex((prev) =>
+                    (prev + 1) % SIGNATURE_PROJECTS.length
+                  );
+                }}
+                className="w-10 h-10 rounded-full border border-gold/30 bg-slate-950/70 text-gold flex items-center justify-center backdrop-blur-md transition-all duration-300 hover:bg-gold hover:text-slate-950 hover:border-gold hover:scale-110 shadow-lg hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] cursor-pointer"
+                title="Next Project"
+              >
+                <ChevronDown className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -226,9 +464,9 @@ export function Hero() {
                 { label: "ROI Average", value: 8, suffix: "%" },
               ].map((stat, idx) => (
                 <div key={idx} className="hero-stat relative text-center py-1">
-                  <h3 className="text-xl md:text-2xl font-serif text-white font-bold mb-0.5 tracking-tight">
+                  <h3 className="text-xl md:text-2xl font-sans text-white font-bold mb-0.5 tracking-tight">
                     {stat.prefix}
-                    <CountUp end={stat.value} duration={2} />
+                    <CountUp start={0} end={stat.value} duration={2.5} separator="," delay={0.8 + idx * 0.15} />
                     {stat.suffix}
                   </h3>
                   <p className="text-white/50 text-[8px] uppercase font-bold tracking-[0.18em]">
@@ -270,12 +508,12 @@ export function Hero() {
               className="relative w-full max-w-5xl aspect-[16/10] max-h-[80vh] flex items-center justify-center"
             >
               {/* Left Arrow */}
-              {propertyImages.length > 1 && (
+              {galleryImages.length > 1 && (
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setCurrentImg((prev) =>
-                      prev === 0 ? propertyImages.length - 1 : prev - 1,
+                      prev === 0 ? galleryImages.length - 1 : prev - 1,
                     );
                   }}
                   className="absolute left-4 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/60 text-white transition-all border border-white/10 shadow-lg"
@@ -285,12 +523,12 @@ export function Hero() {
               )}
 
               {/* Right Arrow */}
-              {propertyImages.length > 1 && (
+              {galleryImages.length > 1 && (
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setCurrentImg((prev) =>
-                      prev === propertyImages.length - 1 ? 0 : prev + 1,
+                      prev === galleryImages.length - 1 ? 0 : prev + 1,
                     );
                   }}
                   className="absolute right-4 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/60 text-white transition-all border border-white/10 shadow-lg"
@@ -301,9 +539,9 @@ export function Hero() {
 
               {/* Active Image or Video Slide - Set to object-contain to prevent any cropping */}
               <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-black">
-                {propertyImages[currentImg].endsWith(".mp4") ? (
+                {galleryImages[currentImg] && galleryImages[currentImg].endsWith(".mp4") ? (
                   <video
-                    key={propertyImages[currentImg]}
+                    key={galleryImages[currentImg]}
                     autoPlay
                     muted
                     loop
@@ -311,22 +549,24 @@ export function Hero() {
                     controls
                     className="w-full h-full object-contain"
                   >
-                    <source src={propertyImages[currentImg]} type="video/mp4" />
+                    <source src={galleryImages[currentImg]} type="video/mp4" />
                   </video>
                 ) : (
-                  <Image
-                    src={propertyImages[currentImg]}
-                    alt={`Property Image ${currentImg + 1}`}
-                    fill
-                    className="object-contain"
-                    priority
-                  />
+                  galleryImages[currentImg] && (
+                    <Image
+                      src={galleryImages[currentImg]}
+                      alt={`Property Image ${currentImg + 1}`}
+                      fill
+                      className="object-contain"
+                      priority
+                    />
+                  )
                 )}
               </div>
 
               {/* Image Counter Indicator Footer */}
               <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 text-white text-xs font-semibold tracking-widest uppercase shadow-md">
-                {currentImg + 1} / {propertyImages.length}
+                {currentImg + 1} / {galleryImages.length}
               </div>
             </div>
           </motion.div>

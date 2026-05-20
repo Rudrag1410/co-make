@@ -11,14 +11,14 @@ import Image from "next/image";
 
 const TESTIMONIALS = [
   {
-    name: "Alexander Volkov",
+    name: "Faisal Al-Marzouqi",
     role: "International Investor",
     content: "The expertise of the Comake Homes team is unparalleled. They found me a waterfront penthouse that exceeded all my expectations in terms of ROI and lifestyle.",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=100&w=3840&auto=format&fit=crop",
     rating: 5,
   },
   {
-    name: "Sarah Al-Maktoum",
+    name: "Sarah Al-Mansoori",
     role: "Local Business Owner",
     content: "Seamless property management and a deep understanding of the Dubai market. They handle everything from tenant relations to maintenance with absolute professionalism.",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=100&w=3840&auto=format&fit=crop",
@@ -84,7 +84,7 @@ export function Testimonials() {
                     <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
                   ))}
                 </div>
-                
+
                 <div className="relative mb-6">
                   <Quote className="absolute -top-3 -left-3 w-8 h-8 text-gold/10" />
                   <p className="text-slate-950/70 text-sm italic leading-relaxed relative z-10">

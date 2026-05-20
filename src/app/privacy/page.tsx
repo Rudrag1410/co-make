@@ -117,7 +117,7 @@ export default function PrivacyPage() {
                 </h2>
                 <p className="text-slate-950/70 leading-relaxed">
                   If you have questions or comments about this policy, you may
-                  email us at <strong>comakehomes88@gmail.com</strong>
+                  email us at <strong>Info@comakehomes.com</strong>
                   or visit our office at Al Barsha 1, Dubai, UAE.
                 </p>
               </section>

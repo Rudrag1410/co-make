@@ -125,7 +125,7 @@ export default function TermsPage() {
                 <p className="text-slate-950/70 leading-relaxed">
                   In order to resolve a complaint regarding the Site or to
                   receive further information regarding use of the Site, please
-                  contact us at <strong>comakehomes88@gmail.com</strong>.
+                  contact us at <strong>Info@comakehomes.com</strong>.
                 </p>
               </section>
             </div>

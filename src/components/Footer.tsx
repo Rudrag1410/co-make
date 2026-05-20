@@ -54,7 +54,7 @@ export function Footer() {
                 <Phone className="w-3.5 h-3.5" />
               </a>
               <a
-                href="mailto:comakehomes88@gmail.com"
+                href="mailto:Info@comakehomes.com"
                 className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-gold hover:border-gold transition-all"
               >
                 <Mail className="w-3.5 h-3.5" />
@@ -141,12 +141,12 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:comakehomes88@gmail.com"
+                  href="mailto:Info@comakehomes.com"
                   className="flex items-center space-x-3 group cursor-pointer"
                 >
                   <Mail className="text-gold w-4 h-4 shrink-0 group-hover:scale-110 transition-transform" />
                   <span className="text-white/60 text-xs group-hover:text-gold transition-colors">
-                    comakehomes88@gmail.com
+                    Info@comakehomes.com
                   </span>
                 </a>
               </li>

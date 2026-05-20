@@ -10,9 +10,6 @@ import {
   CalendarDays,
   Download,
   X,
-  Phone,
-  User,
-  CheckCircle,
   Image as ImageIcon,
   ChevronLeft,
   ChevronRight,
@@ -27,7 +24,12 @@ const LAUNCHES = [
     location: "Near Academic City, Dubai",
     isFocus: true,
     video: "/video/greenz_danube.mp4",
-    pdf: "/pdf/Greenz by Danube_Brochure new.pdf",
+    pdfs: [
+      "/pdf/Greenz by Danube - Phase 1 Master Plan.pdf",
+      "/pdf/Greenz by Danube Electronic Advertisement Permit.pdf",
+      "/pdf/Greenz by Danube_Brochure new.pdf",
+      "/pdf/Greenz Updated Masterplan with 5bed price.pdf"
+    ],
     price: "AED 3.5M",
     tags: ["Villas", "Townhouses", "Sky Gardens"],
     description:
@@ -50,6 +52,7 @@ const LAUNCHES = [
     video: "/images/modon-1.mp4",
     image: "/images/modon.jpeg",
     pdf: null,
+    pdfs: null,
     price: "AED 4.3M",
     tags: ["Golf Villas", "Townhouses"],
     description:
@@ -81,6 +84,7 @@ const LAUNCHES = [
     image:
       "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=100&w=3840&auto=format&fit=crop",
     pdf: "/pdf/AlGhadeer_Factsheet_260516_124159.pdf",
+    pdfs: ["/pdf/AlGhadeer_Factsheet_260516_124159.pdf"],
     price: "AED 1.7M",
     tags: ["Master Community", "Townhouses", "Villas"],
     description:
@@ -101,20 +105,64 @@ const LAUNCHES = [
 ];
 
 export function ExclusiveLaunches() {
-  const [downloadModalOpen, setDownloadModalOpen] = useState(false);
-  const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
   const [activeProject, setActiveProject] = useState<
     (typeof LAUNCHES)[0] | null
   >(null);
-
-  // Form States
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [touchStartX, setTouchStartX] = useState(0);
+
+  useEffect(() => {
+    const handleSuccess = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail?.action === "exclusive-gallery" && customEvent.detail?.payload) {
+        setActiveProject(customEvent.detail.payload);
+        setActiveGalleryIndex(0);
+        setGalleryOpen(true);
+      } else if (customEvent.detail?.action === "exclusive-download" && customEvent.detail?.payload) {
+        const project = customEvent.detail.payload;
+        if (project.pdfs && project.pdfs.length > 0) {
+          project.pdfs.forEach((pdfPath: string, index: number) => {
+            setTimeout(async () => {
+              try {
+                const response = await fetch(pdfPath);
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.setAttribute("download", pdfPath.split("/").pop() || "brochure.pdf");
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => window.URL.revokeObjectURL(url), 100);
+              } catch (err) {
+                console.error("Failed to download PDF", err);
+              }
+            }, index * 300);
+          });
+        } else if (project.pdf) {
+          (async () => {
+            try {
+              const response = await fetch(project.pdf);
+              const blob = await response.blob();
+              const url = window.URL.createObjectURL(blob);
+              const link = document.createElement("a");
+              link.href = url;
+              link.setAttribute("download", project.pdf.split("/").pop() || "brochure.pdf");
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              setTimeout(() => window.URL.revokeObjectURL(url), 100);
+            } catch (err) {
+              console.error("Failed to download PDF", err);
+            }
+          })();
+        }
+      }
+    };
+    window.addEventListener("inquiry-success", handleSuccess);
+    return () => window.removeEventListener("inquiry-success", handleSuccess);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -143,59 +191,29 @@ export function ExclusiveLaunches() {
   }, [galleryOpen, activeProject]);
 
   const handleDownloadClick = (project: (typeof LAUNCHES)[0]) => {
-    setActiveProject(project);
-    setDownloadModalOpen(true);
-    setIsSuccess(false);
+    window.dispatchEvent(
+      new CustomEvent("open-inquiry-popup", {
+        detail: { action: "exclusive-download", payload: project }
+      })
+    );
   };
 
   const handleRegisterClick = (project: (typeof LAUNCHES)[0]) => {
-    setActiveProject(project);
-    setRegisterModalOpen(true);
-    setIsSuccess(false);
+    window.dispatchEvent(
+      new CustomEvent("open-inquiry-popup", {
+        detail: { action: "exclusive-register", payload: project }
+      })
+    );
   };
 
   const handleGalleryClick = (project: (typeof LAUNCHES)[0]) => {
-    setActiveProject(project);
-    setActiveGalleryIndex(0);
-    setGalleryOpen(true);
+    window.dispatchEvent(
+      new CustomEvent("open-inquiry-popup", {
+        detail: { action: "exclusive-gallery", payload: project }
+      })
+    );
   };
 
-  const handleRegisterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!phoneNumber || !fullName) return;
-
-    setIsSubmitting(true);
-    // Simulate API call for lead registration
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-
-      // Auto-close after success
-      setTimeout(() => {
-        setRegisterModalOpen(false);
-        setIsSuccess(false);
-        setPhoneNumber("");
-        setFullName("");
-      }, 2500);
-    }, 1500);
-  };
-
-  const handleLeadSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!phoneNumber) return;
-
-    setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setDownloadModalOpen(false);
-      // Trigger PDF download
-      if (activeProject?.pdf) {
-        window.open(activeProject.pdf, "_blank");
-      }
-      setPhoneNumber("");
-    }, 1500);
-  };
 
   return (
     <section className="py-24 bg-slate-950 relative z-10 overflow-hidden border-t border-gold/10">
@@ -378,7 +396,7 @@ export function ExclusiveLaunches() {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-3">
-                  {launch.pdf && (
+                  {(launch.pdf || launch.pdfs) && (
                     <button
                       onClick={() => handleDownloadClick(launch)}
                       className="flex-1 flex items-center justify-center space-x-2 bg-slate-900 border border-gold/30 text-gold font-bold text-[11px] uppercase tracking-widest py-3.5 rounded-xl hover:bg-gold hover:text-slate-950 transition-all duration-300"
@@ -399,194 +417,6 @@ export function ExclusiveLaunches() {
           ))}
         </div>
       </div>
-
-      {/* Download Brochure Lead Capture Modal */}
-      <AnimatePresence>
-        {downloadModalOpen && activeProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xl"
-          >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative w-full max-w-md bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/10"
-            >
-              <button
-                onClick={() => setDownloadModalOpen(false)}
-                className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-black/20 text-white/60 hover:text-white transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="p-8">
-                <div className="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mb-6">
-                  <Download className="w-6 h-6 text-gold" />
-                </div>
-
-                <h3 className="text-2xl font-serif font-bold text-white mb-2">
-                  Unlock the Brochure
-                </h3>
-                <p className="text-white/60 text-sm mb-8">
-                  Enter your WhatsApp number to instantly view the official
-                  master plan and brochure for{" "}
-                  <strong className="text-white">{activeProject.title}</strong>.
-                </p>
-
-                <form onSubmit={handleLeadSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-white/50 text-[10px] uppercase font-bold tracking-widest mb-2">
-                      WhatsApp Number
-                    </label>
-                    <div className="relative">
-                      <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
-                      <input
-                        type="tel"
-                        required
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        placeholder="+971 50 000 0000"
-                        className="w-full bg-slate-950 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-white/20 focus:outline-none focus:border-gold/50 transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full mt-4 bg-gradient-to-r from-[#8E6523] via-[#C89B3C] to-[#8E6523] text-white font-bold text-sm uppercase tracking-widest py-4 rounded-xl hover:brightness-110 active:scale-95 transition-all duration-300 disabled:opacity-70 flex items-center justify-center space-x-2"
-                  >
-                    {isSubmitting ? (
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    ) : (
-                      <>
-                        <Download className="w-4 h-4" />
-                        <span>Download Now</span>
-                      </>
-                    )}
-                  </button>
-                  <p className="text-center text-[10px] text-white/40 mt-4">
-                    Your details are strictly confidential.
-                  </p>
-                </form>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Register Interest Lead Capture Modal */}
-      <AnimatePresence>
-        {registerModalOpen && activeProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xl"
-          >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative w-full max-w-md bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/10"
-            >
-              <button
-                onClick={() => setRegisterModalOpen(false)}
-                className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-black/20 text-white/60 hover:text-white transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="p-8">
-                <div className="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mb-6">
-                  <Star className="w-6 h-6 text-gold fill-gold" />
-                </div>
-
-                <h3 className="text-2xl font-serif font-bold text-white mb-2">
-                  Register Interest
-                </h3>
-                <p className="text-white/60 text-sm mb-8">
-                  Get priority access and original launch pricing for{" "}
-                  <strong className="text-white">{activeProject.title}</strong>.
-                </p>
-
-                {isSuccess ? (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="flex flex-col items-center justify-center py-8 text-center"
-                  >
-                    <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-4">
-                      <CheckCircle className="w-8 h-8 text-green-500" />
-                    </div>
-                    <h4 className="text-xl font-bold text-white mb-2">
-                      Registration Complete!
-                    </h4>
-                    <p className="text-white/60 text-sm">
-                      Our luxury property consultant will contact you shortly
-                      with exclusive details.
-                    </p>
-                  </motion.div>
-                ) : (
-                  <form onSubmit={handleRegisterSubmit} className="space-y-4">
-                    <div>
-                      <label className="block text-white/50 text-[10px] uppercase font-bold tracking-widest mb-2">
-                        Full Name
-                      </label>
-                      <div className="relative">
-                        <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
-                        <input
-                          type="text"
-                          required
-                          value={fullName}
-                          onChange={(e) => setFullName(e.target.value)}
-                          placeholder="Your Name"
-                          className="w-full bg-slate-950 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-white/20 focus:outline-none focus:border-gold/50 transition-colors"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-white/50 text-[10px] uppercase font-bold tracking-widest mb-2">
-                        WhatsApp Number
-                      </label>
-                      <div className="relative">
-                        <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
-                        <input
-                          type="tel"
-                          required
-                          value={phoneNumber}
-                          onChange={(e) => setPhoneNumber(e.target.value)}
-                          placeholder="+971 50 000 0000"
-                          className="w-full bg-slate-950 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-white/20 focus:outline-none focus:border-gold/50 transition-colors"
-                        />
-                      </div>
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full mt-4 bg-gradient-to-r from-[#8E6523] via-[#C89B3C] to-[#8E6523] text-white font-bold text-sm uppercase tracking-widest py-4 rounded-xl hover:brightness-110 active:scale-95 transition-all duration-300 disabled:opacity-70 flex items-center justify-center space-x-2"
-                    >
-                      {isSubmitting ? (
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      ) : (
-                        <span>Submit Registration</span>
-                      )}
-                    </button>
-                    <p className="text-center text-[10px] text-white/40 mt-4">
-                      Your details are strictly confidential.
-                    </p>
-                  </form>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Lightbox / Gallery Slideshow Modal */}
       <AnimatePresence>

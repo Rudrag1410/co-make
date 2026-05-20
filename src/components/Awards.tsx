@@ -20,14 +20,17 @@ export function Awards() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="max-w-xl">
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-gold font-bold uppercase tracking-[0.2em] text-[10px] mb-3"
+              className="inline-flex items-center space-x-2 bg-gold/10 border border-gold/30 px-4 py-1.5 rounded-full mb-4 shadow-sm"
             >
-              Industry Excellence
-            </motion.p>
+              <span className="w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
+              <span className="text-gold font-bold uppercase tracking-[0.2em] text-[9px]">
+                Industry Excellence
+              </span>
+            </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
