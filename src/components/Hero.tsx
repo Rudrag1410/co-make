@@ -242,10 +242,10 @@ export function Hero() {
             opportunities in Dubai&apos;s most prestigious communities.
           </p>
 
-          <div className="relative max-w-xl mx-auto mb-20 flex items-center justify-center">
+          <div className="relative w-full max-w-xl mx-auto mb-20 flex items-center justify-center px-4 md:px-0">
             {/* The stacked card container */}
             <div
-              className="relative w-full h-[128px] md:h-[160px] select-none"
+              className="relative w-full h-[140px] md:h-[160px] select-none"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
@@ -294,7 +294,7 @@ export function Hero() {
                         );
                       }
                     }}
-                    className={`absolute inset-0 w-full h-full flex items-center p-4 rounded-2xl border border-white/10 bg-slate-950/70 backdrop-blur-xl shadow-2xl transition-colors duration-500 ${
+                    className={`absolute inset-0 w-full h-full flex items-center p-3 md:p-4 rounded-2xl border border-white/10 bg-slate-950/70 backdrop-blur-xl shadow-2xl transition-colors duration-500 ${
                       isActive 
                         ? "cursor-pointer border-gold/20 hover:border-gold/45 hover:bg-slate-950/85 hover:shadow-[0_25px_60px_rgba(200,155,60,0.22)]" 
                         : "cursor-pointer hover:border-white/20 hover:bg-slate-950/80"
@@ -311,7 +311,7 @@ export function Hero() {
                     )}
 
                     {/* Autoplay Video Thumbnail */}
-                    <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 border border-gold/25 bg-slate-900 z-10">
+                    <div className="relative w-20 h-20 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 border border-gold/25 bg-slate-900 z-10">
                       <video
                         key={project.video}
                         autoPlay
@@ -327,34 +327,34 @@ export function Hero() {
                     </div>
 
                     {/* Content */}
-                    <div className="ml-6 text-left flex-grow z-10">
-                      <div className="flex items-center space-x-2.5 mb-2">
-                        <Star className={`w-3 h-3 text-gold fill-gold ${isActive ? "animate-spin-slow" : ""}`} />
-                        <span className="text-gold text-[9px] font-bold uppercase tracking-[0.2em]">
+                    <div className="ml-3 md:ml-6 text-left flex-grow z-10 min-w-0">
+                      <div className="flex items-center space-x-1.5 md:space-x-2.5 mb-1 md:mb-2">
+                        <Star className={`w-2.5 h-2.5 md:w-3 h-3 text-gold fill-gold ${isActive ? "animate-spin-slow" : ""}`} />
+                        <span className="text-gold text-[8px] md:text-[9px] font-bold uppercase tracking-[0.2em] truncate">
                           Signature Collection
                         </span>
                         {isActive && (
-                          <span className="text-white/40 text-[9px] font-bold tracking-wider font-sans bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">
+                          <span className="text-white/40 text-[8px] md:text-[9px] font-bold tracking-wider font-sans bg-white/5 border border-white/10 px-1.5 py-0.5 rounded-md flex-shrink-0">
                             {idx + 1}/{SIGNATURE_PROJECTS.length}
                           </span>
                         )}
                       </div>
-                      <h3 className="text-white text-lg md:text-xl font-serif font-bold mb-1 leading-tight">
+                      <h3 className="text-white text-sm md:text-xl font-serif font-bold mb-0.5 md:mb-1 leading-tight truncate-two-lines">
                         {project.title} <br />
-                        <span className="text-white/60 text-sm italic font-sans font-normal">
+                        <span className="text-white/60 text-[10px] md:text-sm italic font-sans font-normal block truncate">
                           {project.subtitle}
                         </span>
                       </h3>
-                      <div className="flex items-center text-white/40 space-x-2">
-                        <MapPin className="w-3 h-3 text-gold" />
-                        <span className="text-[10px] font-medium tracking-wide">
+                      <div className="flex items-center text-white/40 space-x-1.5">
+                        <MapPin className="w-2.5 h-2.5 md:w-3 h-3 text-gold flex-shrink-0" />
+                        <span className="text-[8px] md:text-[10px] font-medium tracking-wide truncate">
                           {project.location}
                         </span>
                       </div>
                     </div>
 
                     {/* Action Buttons: Gallery & Brochure */}
-                    <div className="flex-shrink-0 ml-4 flex space-x-3 z-20 pointer-events-auto">
+                    <div className="flex-shrink-0 ml-2 md:ml-4 flex space-x-2 md:space-x-3 z-20 pointer-events-auto">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -370,12 +370,12 @@ export function Hero() {
                             })
                           );
                         }}
-                        className="flex flex-col items-center justify-center space-y-1 group/btn"
+                        className="flex flex-col items-center justify-center space-y-0.5 md:space-y-1 group/btn"
                       >
-                        <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-slate-950 transition-all duration-500">
-                          <ImageIcon className="w-5 h-5" />
+                        <div className="w-9 h-9 md:w-12 md:h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-slate-950 transition-all duration-500">
+                          <ImageIcon className="w-4 h-4 md:w-5 h-5" />
                         </div>
-                        <span className="text-[8px] font-bold uppercase tracking-widest text-white/40 group-hover/btn:text-gold transition-colors">
+                        <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest text-white/40 group-hover/btn:text-gold transition-colors">
                           Gallery
                         </span>
                       </button>
@@ -396,12 +396,12 @@ export function Hero() {
                               })
                             );
                           }}
-                          className="flex flex-col items-center justify-center space-y-1 group/btn"
+                          className="flex flex-col items-center justify-center space-y-0.5 md:space-y-1 group/btn"
                         >
-                          <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-slate-950 transition-all duration-500">
-                            <Download className="w-5 h-5" />
+                          <div className="w-9 h-9 md:w-12 md:h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-slate-950 transition-all duration-500">
+                            <Download className="w-4 h-4 md:w-5 h-5" />
                           </div>
-                          <span className="text-[8px] font-bold uppercase tracking-widest text-white/40 group-hover/btn:text-gold transition-colors">
+                          <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest text-white/40 group-hover/btn:text-gold transition-colors">
                             Brochure
                           </span>
                         </button>
@@ -413,7 +413,7 @@ export function Hero() {
             </div>
 
             {/* Up/Down Navigation Controls on the Right */}
-            <div className="absolute right-[-48px] md:right-[-64px] top-1/2 -translate-y-1/2 flex flex-col space-y-3.5 z-40">
+            <div className="absolute right-[-48px] md:right-[-64px] top-1/2 -translate-y-1/2 flex flex-col space-y-3.5 z-40 hidden md:flex">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
