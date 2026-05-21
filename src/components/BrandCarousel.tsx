@@ -271,6 +271,43 @@ const DEVELOPERS_ROW_2 = [
   },
 ];
 
+type Developer = (typeof DEVELOPERS_ROW_1)[number];
+
+function BrandCard({ dev }: { dev: Developer }) {
+  return (
+    <div className="inline-flex shrink-0 items-center justify-center w-[7.25rem] h-[3.25rem] px-3 py-2 sm:w-36 sm:h-[4.25rem] sm:px-4 sm:py-3 md:w-40 md:h-20 md:px-6 md:py-4 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm hover:border-gold/30 hover:bg-white/5 transition-all duration-300 group cursor-default shadow-lg">
+      <div className="relative w-[5.5rem] h-9 sm:w-28 sm:h-10 md:w-32 md:h-12 transition-all duration-300 filter brightness-0 invert opacity-50 sm:opacity-40 group-hover:opacity-100 group-hover:brightness-100 group-hover:invert-0 flex items-center justify-center">
+        {dev.svg}
+      </div>
+    </div>
+  );
+}
+
+function MarqueeRow({
+  items,
+  direction,
+}: {
+  items: Developer[];
+  direction: "left" | "right";
+}) {
+  return (
+    <div className="relative w-full overflow-hidden py-2 sm:py-3 flex select-none">
+      <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-48 bg-gradient-to-r from-slate-950 to-transparent z-20 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-48 bg-gradient-to-l from-slate-950 to-transparent z-20 pointer-events-none" />
+
+      <div
+        className={`flex whitespace-nowrap gap-3 sm:gap-5 md:gap-6 w-max ${
+          direction === "left" ? "animate-marquee" : "animate-marquee-reverse"
+        }`}
+      >
+        {items.map((dev, idx) => (
+          <BrandCard key={`${dev.name}-${idx}`} dev={dev} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function BrandCarousel() {
   // Double-concatenate arrays to ensure mathematically seamless infinite scrolling
   const row1Items = [
@@ -285,70 +322,35 @@ export function BrandCarousel() {
   ];
 
   return (
-    <section className="py-20 bg-slate-950 text-white overflow-hidden relative border-b border-gold/10">
+    <section className="py-12 sm:py-16 md:py-20 bg-slate-950 text-white overflow-hidden relative border-b border-gold/10">
       {/* Dynamic luxury gold background glows */}
-      <div className="absolute top-0 left-1/3 w-[500px] h-[300px] bg-gold/5 rounded-full filter blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/3 w-[400px] h-[250px] bg-slate-900/50 rounded-full filter blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 left-1/3 w-[280px] sm:w-[500px] h-[180px] sm:h-[300px] bg-gold/5 rounded-full filter blur-[80px] sm:blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/3 w-[220px] sm:w-[400px] h-[140px] sm:h-[250px] bg-slate-900/50 rounded-full filter blur-[70px] sm:blur-[100px] pointer-events-none" />
 
-      <div className="container mx-auto px-6 mb-12 relative z-10 text-center">
+      <div className="container mx-auto px-4 sm:px-6 mb-6 sm:mb-10 md:mb-12 relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-2xl mx-auto"
+          className="max-w-2xl mx-auto w-full"
         >
-          <p className="text-gold font-bold uppercase tracking-[0.25em] text-[10px] mb-3">
+          <p className="text-gold font-bold uppercase tracking-[0.15em] sm:tracking-[0.25em] text-[9px] sm:text-[10px] mb-2 sm:mb-3">
             Authorized Partners
           </p>
-          <h2 className="text-2xl md:text-4xl font-serif font-bold mb-4 tracking-tight">
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-serif font-bold mb-3 sm:mb-4 tracking-tight leading-snug">
             Working with Dubai&apos;s{" "}
             <span className="italic text-gold">Elite</span> Developers
           </h2>
-          <p className="text-white/50 text-xs md:text-sm leading-relaxed">
+          <p className="text-white/50 text-xs sm:text-sm leading-relaxed px-0.5">
             Direct VIP access and priority booking allocation across the
             UAE&apos;s most prestigious real estate developers.
           </p>
         </motion.div>
       </div>
 
-      {/* Row 1: Scrolling Left */}
-      <div className="relative w-full overflow-hidden py-4 flex select-none">
-        {/* Shadow Overlay Gradients for smooth fading edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-slate-950 to-transparent z-20 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-slate-950 to-transparent z-20 pointer-events-none" />
-
-        <div className="flex animate-marquee whitespace-nowrap gap-6 w-max">
-          {row1Items.map((dev, idx) => (
-            <div
-              key={idx}
-              className="inline-flex items-center justify-center w-40 h-20 px-6 py-4 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm hover:border-gold/30 hover:bg-white/5 transition-all duration-300 group cursor-default shadow-lg"
-            >
-              <div className="relative w-32 h-12 transition-all duration-300 filter brightness-0 invert opacity-40 group-hover:opacity-100 group-hover:brightness-100 group-hover:invert-0 flex items-center justify-center">
-                {dev.svg}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Row 2: Scrolling Right */}
-      <div className="relative w-full overflow-hidden py-4 flex select-none">
-        {/* Shadow Overlay Gradients for smooth fading edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-slate-950 to-transparent z-20 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-slate-950 to-transparent z-20 pointer-events-none" />
-
-        <div className="flex animate-marquee-reverse whitespace-nowrap gap-6 w-max">
-          {row2Items.map((dev, idx) => (
-            <div
-              key={idx}
-              className="inline-flex items-center justify-center w-40 h-20 px-6 py-4 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm hover:border-gold/30 hover:bg-white/5 transition-all duration-300 group cursor-default shadow-lg"
-            >
-              <div className="relative w-32 h-12 transition-all duration-300 filter brightness-0 invert opacity-40 group-hover:opacity-100 group-hover:brightness-100 group-hover:invert-0 flex items-center justify-center">
-                {dev.svg}
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="space-y-1 sm:space-y-2">
+        <MarqueeRow items={row1Items} direction="left" />
+        <MarqueeRow items={row2Items} direction="right" />
       </div>
     </section>
   );

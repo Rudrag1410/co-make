@@ -62,17 +62,37 @@ export function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [mobileMenuOpen]);
+
   const isHomePage = pathname === "/";
   // Safe evaluation to ensure perfect transparency during SSR and hydration
   const showDarkBg = mounted ? isScrolled || !isHomePage : false;
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    setMobileMenuOpen(false);
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
+    <>
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        showDarkBg
-          ? "bg-slate-950/90 h-16 shadow-lg border-b border-white/5"
-          : "bg-slate-950/20 border-b border-white/5 h-20",
+        mobileMenuOpen && "bg-slate-950/95 border-b border-white/5 h-16 shadow-lg",
+        !mobileMenuOpen &&
+          (showDarkBg
+            ? "bg-slate-950/90 h-16 shadow-lg border-b border-white/5"
+            : "bg-slate-950/20 border-b border-white/5 h-20"),
       )}
       style={{
         backdropFilter: showDarkBg ? "blur(16px)" : "blur(12px)",
@@ -81,7 +101,13 @@ export function Navbar() {
     >
       <div className="container mx-auto px-6 h-full flex items-center justify-between">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center space-x-1">
+        <Link
+          href="/"
+          scroll
+          onClick={handleLogoClick}
+          className="flex items-center space-x-1 shrink-0"
+          aria-label="Comake Homes — go to homepage top"
+        >
           <Image
             src="/comake-home-logo.png"
             alt="Comake Homes"
@@ -175,53 +201,67 @@ export function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="lg:hidden text-white"
+          type="button"
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileMenuOpen}
+          className="lg:hidden relative z-[60] flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? (
-            <X className="w-6 h-6" />
+            <X className="h-6 w-6" />
           ) : (
-            <Menu className="w-6 h-6" />
+            <Menu className="h-6 w-6" />
           )}
         </button>
       </div>
-
-      {/* Mobile Nav Drawer */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            className="lg:hidden fixed inset-0 bg-slate-950 z-40 pt-24 px-8"
-          >
-            <nav className="flex flex-col space-y-8">
-              {NAV_ITEMS.map((item) => (
-                <div key={item.title}>
-                  <Link
-                    href={item.href}
-                    className="text-4xl font-serif text-white font-bold"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item.title}
-                  </Link>
-                </div>
-              ))}
-              <div className="pt-8 border-t border-white/10">
-                <Button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    window.dispatchEvent(new Event("open-inquiry-popup"));
-                  }}
-                  className="bg-gradient-to-r from-[#8E6523] via-[#C89B3C] to-[#8E6523] text-white font-bold w-full py-6 text-[15px] rounded-full tracking-widest shadow-lg"
-                >
-                  GET CONSULTATION
-                </Button>
-              </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
+
+    {/* Mobile menu — outside header so fixed positioning isn't clipped by backdrop-filter */}
+    <AnimatePresence>
+      {mobileMenuOpen && (
+        <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="lg:hidden fixed inset-0 z-40 bg-slate-950"
+        >
+          <motion.nav
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="flex h-full flex-col overflow-y-auto px-8 pb-10 pt-24"
+          >
+            {NAV_ITEMS.map((item) => (
+              <div key={item.title} className="border-b border-white/5 py-6">
+                <Link
+                  href={item.href}
+                  className="font-serif text-3xl font-bold text-white transition-colors hover:text-gold sm:text-4xl"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.title}
+                </Link>
+              </div>
+            ))}
+            <div className="mt-auto pt-8">
+              <Button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  window.dispatchEvent(new Event("open-inquiry-popup"));
+                }}
+                className="h-auto w-full rounded-full bg-gradient-to-r from-[#8E6523] via-[#C89B3C] to-[#8E6523] py-6 text-[15px] font-bold tracking-widest text-white shadow-lg"
+              >
+                GET CONSULTATION
+              </Button>
+            </div>
+          </motion.nav>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }

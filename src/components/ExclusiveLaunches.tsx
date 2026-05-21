@@ -216,21 +216,21 @@ export function ExclusiveLaunches() {
 
 
   return (
-    <section className="py-24 bg-slate-950 relative z-10 overflow-hidden border-t border-gold/10">
+    <section className="py-12 sm:py-16 md:py-24 bg-slate-950 relative z-10 overflow-hidden border-t border-gold/10">
       {/* Decorative Gold Blurs */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gold/10 rounded-full blur-[120px] pointer-events-none opacity-50" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[100px] pointer-events-none opacity-50" />
+      <div className="absolute top-0 left-1/4 w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] bg-gold/10 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none opacity-50" />
+      <div className="absolute bottom-0 right-1/4 w-[220px] sm:w-[400px] h-[220px] sm:h-[400px] bg-gold/5 rounded-full blur-[70px] sm:blur-[100px] pointer-events-none opacity-50" />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 bg-gold/10 border border-gold/20 px-4 py-1.5 rounded-full mb-6"
+            className="inline-flex items-center space-x-2 bg-gold/10 border border-gold/20 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full mb-4 sm:mb-6"
           >
-            <Star className="w-3.5 h-3.5 text-gold fill-gold animate-pulse" />
-            <span className="text-gold text-[10px] font-bold uppercase tracking-widest">
+            <Star className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gold fill-gold animate-pulse" />
+            <span className="text-gold text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.12em] sm:tracking-widest">
               Upcoming Pre-Launches
             </span>
           </motion.div>
@@ -239,7 +239,7 @@ export function ExclusiveLaunches() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-serif font-bold text-white mb-6"
+            className="text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-white mb-4 sm:mb-6"
           >
             Exclusive{" "}
             <span className="italic text-gold font-light">New Launches</span>
@@ -249,7 +249,7 @@ export function ExclusiveLaunches() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-white/60 font-medium leading-relaxed"
+            className="text-white/60 text-sm sm:text-base font-medium leading-relaxed"
           >
             Secure priority allocation at the original launch price. Download
             the official brochures and master plans.
@@ -257,7 +257,7 @@ export function ExclusiveLaunches() {
         </div>
 
         {/* Widescreen stacked layout - 100% width, no empty slots */}
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-6 sm:gap-8 md:gap-12">
           {LAUNCHES.map((launch, idx) => (
             <motion.div
               key={launch.id}
@@ -265,10 +265,10 @@ export function ExclusiveLaunches() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.15 }}
-              className="group relative bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 overflow-hidden hover:border-gold/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(200,155,60,0.15)] flex flex-col md:flex-row w-full"
+              className="group relative bg-white/5 backdrop-blur-md rounded-2xl md:rounded-3xl border border-white/10 overflow-hidden hover:border-gold/30 transition-all duration-500 md:hover:-translate-y-2 md:hover:shadow-[0_20px_40px_rgba(200,155,60,0.15)] flex flex-col md:flex-row w-full"
             >
               {/* Media Header (Widescreen Video/Image) */}
-              <div className="relative w-full md:w-3/5 h-80 md:h-auto min-h-[350px] overflow-hidden">
+              <div className="relative w-full md:w-3/5 h-52 sm:h-64 md:h-auto md:min-h-[350px] overflow-hidden shrink-0">
                 {launch.video ? (
                   <video
                     autoPlay
@@ -291,25 +291,26 @@ export function ExclusiveLaunches() {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90" />
 
                 {/* Top Tags */}
-                <div className="absolute top-4 left-4 flex space-x-2 z-10">
-                  <span className="bg-slate-950/80 backdrop-blur-md border border-gold/30 text-gold text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
+                <div className="absolute top-3 left-3 right-3 md:top-4 md:left-4 md:right-auto flex flex-wrap gap-1.5 md:gap-2 z-10 max-w-[calc(100%-5.5rem)] md:max-w-none">
+                  <span className="bg-slate-950/80 backdrop-blur-md border border-gold/30 text-gold text-[8px] md:text-[9px] font-bold uppercase tracking-[0.12em] md:tracking-widest px-2 py-1 md:px-3 md:py-1.5 rounded-full">
                     {launch.developer}
                   </span>
                   {launch.isFocus && (
-                    <span className="bg-red-600/90 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full animate-pulse">
-                      Hot Focus Project
+                    <span className="bg-red-600/90 text-white text-[8px] md:text-[9px] font-bold uppercase tracking-[0.1em] md:tracking-widest px-2 py-1 md:px-3 md:py-1.5 rounded-full animate-pulse">
+                      <span className="md:hidden">Hot</span>
+                      <span className="hidden md:inline">Hot Focus Project</span>
                     </span>
                   )}
                 </div>
 
                 {/* Title & Location over image */}
-                <div className="absolute bottom-6 left-6 right-6 z-10">
-                  <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-2 drop-shadow-lg">
+                <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 z-10">
+                  <h3 className="text-xl sm:text-2xl md:text-4xl font-serif font-bold text-white mb-1 md:mb-2 drop-shadow-lg leading-tight">
                     {launch.title}
                   </h3>
-                  <div className="flex items-center text-gold space-x-1.5">
-                    <MapPin className="w-4 h-4" />
-                    <span className="text-[12px] font-bold tracking-wide uppercase drop-shadow-md">
+                  <div className="flex items-center text-gold space-x-1 md:space-x-1.5">
+                    <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 shrink-0" />
+                    <span className="text-[10px] md:text-[12px] font-bold tracking-wide uppercase drop-shadow-md leading-snug">
                       {launch.location}
                     </span>
                   </div>
@@ -319,10 +320,15 @@ export function ExclusiveLaunches() {
                 {launch.gallery && launch.gallery.length > 0 && (
                   <button
                     onClick={() => handleGalleryClick(launch)}
-                    className="absolute top-4 right-4 z-10 flex items-center space-x-2 bg-slate-950/85 backdrop-blur-md border border-white/20 text-white hover:text-gold hover:border-gold/50 transition-all duration-300 px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest shadow-lg"
+                    className="absolute top-3 right-3 md:top-4 md:right-4 z-10 flex items-center space-x-1 md:space-x-2 bg-slate-950/85 backdrop-blur-md border border-white/20 text-white hover:text-gold hover:border-gold/50 transition-all duration-300 px-2.5 py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-xl text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-widest shadow-lg shrink-0"
                   >
-                    <ImageIcon className="w-3.5 h-3.5" />
-                    <span>
+                    <ImageIcon className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                    <span className="md:hidden">
+                      {launch.gallery.length > 1
+                        ? `+${launch.gallery.length - 1}`
+                        : "Gallery"}
+                    </span>
+                    <span className="hidden md:inline">
                       {launch.gallery.length > 1
                         ? `+${launch.gallery.length - 1} Photos`
                         : "View Gallery"}
@@ -332,62 +338,62 @@ export function ExclusiveLaunches() {
               </div>
 
               {/* Content Body */}
-              <div className="p-6 md:p-8 flex flex-col justify-center w-full md:w-2/5">
-                <div className="flex flex-wrap gap-2 mb-4">
+              <div className="p-4 sm:p-5 md:p-8 flex flex-col justify-center w-full md:w-2/5">
+                <div className="flex flex-wrap gap-1.5 md:gap-2 mb-3 md:mb-4">
                   {launch.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[10px] font-bold uppercase tracking-wider text-white/60 bg-white/5 border border-white/10 px-2.5 py-1 rounded-md"
+                      className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-white/60 bg-white/5 border border-white/10 px-2 py-0.5 md:px-2.5 md:py-1 rounded-md"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <p className="text-white/70 text-sm leading-relaxed mb-6">
+                <p className="text-white/70 text-xs sm:text-sm leading-relaxed mb-4 md:mb-6">
                   {launch.description}
                 </p>
 
                 {/* Key Financial Highlights */}
-                <div className="bg-slate-950/60 rounded-xl p-4 border border-white/5 mb-6 space-y-4">
-                  <div className="flex justify-between items-center pb-3 border-b border-white/5">
-                    <span className="text-white/50 text-[10px] uppercase font-bold tracking-wider">
+                <div className="bg-slate-950/60 rounded-xl p-3 md:p-4 border border-white/5 mb-4 md:mb-6 space-y-3 md:space-y-4">
+                  <div className="flex flex-col gap-1 pb-3 border-b border-white/5 md:flex-row md:justify-between md:items-center md:gap-0">
+                    <span className="text-white/50 text-[9px] md:text-[10px] uppercase font-bold tracking-wider">
                       Starting Price
                     </span>
-                    <span className="text-gold font-bold text-lg">
+                    <span className="text-gold font-bold text-base md:text-lg">
                       {launch.price}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center pb-3 border-b border-white/5">
-                    <div className="flex items-center space-x-2">
-                      <CalendarDays className="w-4 h-4 text-white/50" />
-                      <span className="text-white/50 text-[10px] uppercase font-bold tracking-wider">
+                  <div className="flex flex-col gap-1 pb-3 border-b border-white/5 md:flex-row md:justify-between md:items-center md:gap-0">
+                    <div className="flex items-center space-x-1.5 md:space-x-2">
+                      <CalendarDays className="w-3.5 h-3.5 md:w-4 md:h-4 text-white/50 shrink-0" />
+                      <span className="text-white/50 text-[9px] md:text-[10px] uppercase font-bold tracking-wider">
                         Payment Plan
                       </span>
                     </div>
-                    <span className="text-white font-bold text-sm">
+                    <span className="text-white font-bold text-xs md:text-sm leading-snug">
                       {launch.paymentPlan}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center space-x-2">
-                      <TrendingUp className="w-4 h-4 text-white/50" />
-                      <span className="text-white/50 text-[10px] uppercase font-bold tracking-wider">
+                  <div className="flex flex-col gap-1.5 md:flex-row md:justify-between md:items-center md:gap-0">
+                    <div className="flex items-center space-x-1.5 md:space-x-2">
+                      <TrendingUp className="w-3.5 h-3.5 md:w-4 md:h-4 text-white/50 shrink-0" />
+                      <span className="text-white/50 text-[9px] md:text-[10px] uppercase font-bold tracking-wider">
                         EOI Structure
                       </span>
                     </div>
-                    <span className="text-white font-bold text-[11px] bg-gold/20 text-gold px-2.5 py-1.5 rounded-md">
+                    <span className="text-white font-bold text-[10px] md:text-[11px] bg-gold/20 text-gold px-2 py-1 md:px-2.5 md:py-1.5 rounded-md w-fit leading-snug">
                       {launch.eoi}
                     </span>
                   </div>
                 </div>
 
                 {/* Features List */}
-                <ul className="space-y-3 mb-8 flex-grow">
+                <ul className="space-y-2 md:space-y-3 mb-5 md:mb-8 flex-grow">
                   {launch.features.map((feature, i) => (
-                    <li key={i} className="flex items-start space-x-3">
-                      <CheckCircle2 className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                      <span className="text-white/90 text-sm font-medium">
+                    <li key={i} className="flex items-start space-x-2 md:space-x-3">
+                      <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-gold shrink-0 mt-0.5" />
+                      <span className="text-white/90 text-xs md:text-sm font-medium leading-snug">
                         {feature}
                       </span>
                     </li>
@@ -395,19 +401,19 @@ export function ExclusiveLaunches() {
                 </ul>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-col gap-2.5 sm:flex-row md:gap-3">
                   {(launch.pdf || launch.pdfs) && (
                     <button
                       onClick={() => handleDownloadClick(launch)}
-                      className="flex-1 flex items-center justify-center space-x-2 bg-slate-900 border border-gold/30 text-gold font-bold text-[11px] uppercase tracking-widest py-3.5 rounded-xl hover:bg-gold hover:text-slate-950 transition-all duration-300"
+                      className="flex-1 flex items-center justify-center space-x-2 bg-slate-900 border border-gold/30 text-gold font-bold text-[10px] md:text-[11px] uppercase tracking-[0.12em] md:tracking-widest py-3 md:py-3.5 rounded-xl hover:bg-gold hover:text-slate-950 transition-all duration-300"
                     >
-                      <Download className="w-4 h-4" />
+                      <Download className="w-4 h-4 shrink-0" />
                       <span>Download Brochure</span>
                     </button>
                   )}
                   <button
                     onClick={() => handleRegisterClick(launch)}
-                    className="flex-1 bg-gradient-to-r from-[#8E6523] via-[#C89B3C] to-[#8E6523] text-white font-bold text-[11px] uppercase tracking-[0.2em] py-3.5 rounded-xl hover:brightness-110 active:scale-95 transition-all duration-300 shadow-lg"
+                    className="flex-1 bg-gradient-to-r from-[#8E6523] via-[#C89B3C] to-[#8E6523] text-white font-bold text-[10px] md:text-[11px] uppercase tracking-[0.15em] md:tracking-[0.2em] py-3 md:py-3.5 rounded-xl hover:brightness-110 active:scale-95 transition-all duration-300 shadow-lg"
                   >
                     Register Interest
                   </button>

@@ -212,13 +212,13 @@ export function Hero() {
         </video>
       </div>
 
-      <div className="container mx-auto px-6 relative z-20 text-center select-none">
-        <div className="max-w-4xl mx-auto">
+      <div className="container mx-auto px-4 sm:px-6 relative z-20 text-center select-none">
+        <div className="max-w-4xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-gold/15 via-slate-950/70 to-gold/15 backdrop-blur-md border border-gold/30 px-5 py-2 rounded-full mb-6 shadow-xl cursor-pointer hover:border-gold/50 hover:scale-105 active:scale-[0.98] transition-all duration-300"
+            className="inline-flex max-w-full items-center space-x-2 bg-gradient-to-r from-gold/15 via-slate-950/70 to-gold/15 backdrop-blur-md border border-gold/30 px-3 py-1.5 sm:px-5 sm:py-2 rounded-full mb-5 sm:mb-6 shadow-xl cursor-pointer hover:border-gold/50 hover:scale-105 active:scale-[0.98] transition-all duration-300"
             onClick={() => {
               window.dispatchEvent(
                 new CustomEvent("open-inquiry-popup", {
@@ -234,28 +234,28 @@ export function Hero() {
             }}
           >
             <span className="w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
-            <span className="text-gold text-[9px] font-extrabold uppercase tracking-[0.25em] drop-shadow-md">
+            <span className="text-gold text-[8px] sm:text-[9px] font-extrabold uppercase tracking-[0.12em] sm:tracking-[0.25em] drop-shadow-md leading-snug">
               Unlock up to 10% off through our exclusive partnership
             </span>
           </motion.div>
 
           <h1
             ref={titleRef}
-            className="text-4xl md:text-6xl lg:text-7xl font-serif text-white font-bold leading-tight mb-5 drop-shadow-[0_5px_15px_rgba(0,0,0,0.6)]"
+            className="text-[1.75rem] leading-[1.15] sm:text-4xl md:text-6xl lg:text-7xl font-serif text-white font-bold mb-4 sm:mb-5 drop-shadow-[0_5px_15px_rgba(0,0,0,0.6)]"
           >
-            Discover Dubai&apos;s Most <br />
+            Discover Dubai&apos;s Most{" "}
             <span className="text-gold italic drop-shadow-[0_5px_15px_rgba(0,0,0,0.6)]">
               Exclusive
             </span>{" "}
             Properties
           </h1>
 
-          <p className="text-base md:text-lg text-white max-w-2xl mx-auto mb-10 font-medium leading-relaxed tracking-wide drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
+          <p className="text-sm sm:text-base md:text-lg text-white max-w-2xl mx-auto mb-8 sm:mb-10 font-medium leading-relaxed tracking-wide drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] px-0.5">
             Premium villas, waterfront residences, and high ROI investment
             opportunities in Dubai&apos;s most prestigious communities.
           </p>
 
-          <div className="relative w-full max-w-xl mx-auto mb-20 flex items-center justify-center px-4 md:px-0">
+          <div className="relative w-full max-w-xl mx-auto mb-16 sm:mb-20 flex items-center justify-center">
             {/* The stacked card container */}
             <div
               className="relative w-full h-[140px] md:h-[160px] select-none"
@@ -307,7 +307,7 @@ export function Hero() {
                         );
                       }
                     }}
-                    className={`absolute inset-0 w-full h-full flex items-center p-3 md:p-4 rounded-2xl border border-white/10 bg-slate-950/70 backdrop-blur-xl shadow-2xl transition-colors duration-500 ${isActive
+                    className={`absolute inset-0 w-full h-full flex items-center p-2.5 sm:p-3 md:p-4 rounded-2xl border border-white/10 bg-slate-950/70 backdrop-blur-xl shadow-2xl transition-colors duration-500 ${isActive
                       ? "cursor-pointer border-gold/20 hover:border-gold/45 hover:bg-slate-950/85 hover:shadow-[0_25px_60px_rgba(200,155,60,0.22)]"
                       : "cursor-pointer hover:border-white/20 hover:bg-slate-950/80"
                       }`}
@@ -457,13 +457,13 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="relative max-w-3xl mx-auto mt-6 group"
+            className="relative max-w-3xl mx-auto mt-4 sm:mt-6 group w-full"
           >
             {/* Ambient gold glow under the dashboard capsule */}
             <div className="absolute -inset-1 bg-gradient-to-r from-gold/15 via-gold/5 to-gold/15 rounded-2xl blur opacity-25 group-hover:opacity-45 transition duration-700" />
 
             {/* Glassmorphic Capsule Container */}
-            <div className="relative grid grid-cols-2 md:grid-cols-4 gap-4 bg-slate-950/45 backdrop-blur-xl border border-white/10 border-t-white/20 px-8 py-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500 hover:border-gold/30 hover:shadow-[0_25px_60px_rgba(200,155,60,0.12)]">
+            <div className="relative grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 bg-slate-950/45 backdrop-blur-xl border border-white/10 border-t-white/20 px-4 py-4 sm:px-6 md:px-8 sm:py-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500 hover:border-gold/30 hover:shadow-[0_25px_60px_rgba(200,155,60,0.12)]">
               {[
                 {
                   label: "Sales Volume",

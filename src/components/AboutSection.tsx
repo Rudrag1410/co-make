@@ -19,12 +19,12 @@ export function AboutSection() {
               viewport={{ once: true }}
               className="relative z-10 rounded-3xl overflow-hidden shadow-2xl"
             >
-                <div className="relative h-[500px]">
+                <div className="relative h-[420px] sm:h-[480px] lg:h-[500px]">
                   <Image
                     src="/images/about-image.jpeg"
                     alt="Abdul Wali Khaliq"
                     fill
-                    className="object-cover"
+                    className="object-cover object-[88%_32%] sm:object-[82%_28%] lg:object-center"
                   />
                 </div>
             </motion.div>

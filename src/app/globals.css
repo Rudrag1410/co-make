@@ -135,6 +135,16 @@
   animation: marquee-reverse 35s linear infinite;
 }
 
+@media (max-width: 639px) {
+  .animate-marquee {
+    animation-duration: 28s;
+  }
+
+  .animate-marquee-reverse {
+    animation-duration: 28s;
+  }
+}
+
 /* Pause marquee scrolling on hover for enhanced user interactivity */
 .animate-marquee:hover,
 .animate-marquee-reverse:hover {
