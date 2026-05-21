@@ -473,7 +473,7 @@ export function Hero() {
                 },
                 { label: "Happy Investors", value: 5000, suffix: "+" },
                 { label: "Active Listings", value: 1200, suffix: "+" },
-                { label: "ROI Average", value: 8, suffix: "%" },
+                { label: "ROI Average", value: 18, suffix: "%" },
               ].map((stat, idx) => (
                 <div key={idx} className="hero-stat relative text-center py-1">
                   <h3 className="text-xl md:text-2xl font-sans text-white font-bold mb-0.5 tracking-tight">

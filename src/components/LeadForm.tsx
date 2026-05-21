@@ -289,8 +289,6 @@ export function LeadForm() {
             viewport={{ once: true }}
             className="w-full rounded-[2rem] overflow-hidden border border-slate-950/10 shadow-[0_20px_60px_rgba(0,0,0,0.15)] bg-slate-950 relative"
           >
-            {/* Overlay to completely hide the Log In button at all screen sizes */}
-            <div className="absolute top-[15px] right-[12px] w-[60px] h-[50px] bg-[#151515] z-10 pointer-events-auto rounded-[8px]" />
             <iframe
               src="https://world.modon.com/abu-dhabi"
               className="w-full h-[55vh] sm:h-[45vh] md:h-[400px] border-none"

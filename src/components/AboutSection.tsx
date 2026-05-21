@@ -21,8 +21,8 @@ export function AboutSection() {
             >
                 <div className="relative h-[500px]">
                   <Image
-                    src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=100&w=3840&auto=format&fit=crop"
-                    alt="Luxury Dubai Architecture"
+                    src="/images/about-image.jpeg"
+                    alt="Abdul Wali Khaliq"
                     fill
                     className="object-cover"
                   />
@@ -65,9 +65,11 @@ export function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-slate-950/70 text-base mb-8 leading-relaxed font-light"
+              className="text-slate-950/70 text-base mb-8 leading-relaxed font-light whitespace-pre-line"
             >
-              Under the visionary leadership of our CEO, Abdul Wali Khaliq, COMAKE HOMES has established itself as the premier advisory for ultra-luxury real estate in Dubai. We provide discerning global investors with unparalleled access to off-market penthouses, waterfront villas, and high-yield strategic assets, ensuring discretion and exceptional returns at every step.
+              Driven by a vision beyond my years, I, Abdul Wali Khaliq, founded Comake Homes with the belief that real estate should represent more than transactions — it should embody legacy, exclusivity, and long-term value.
+              Through unwavering dedication and ambition, Comake Homes was built to offer investors unparalleled access to off-market penthouses, waterfront villas, and strategically positioned high-yield assets. Our mission is to deliver not only exceptional growth opportunities, but investments defined by quality, prestige, and enduring returns.
+              As a young CEO, I am committed to building a company that reflects vision, sophistication, and trust at every level.
             </motion.p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
