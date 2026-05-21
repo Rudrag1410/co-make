@@ -290,7 +290,7 @@ export function LeadForm() {
             className="w-full rounded-[2rem] overflow-hidden border border-slate-950/10 shadow-[0_20px_60px_rgba(0,0,0,0.15)] bg-slate-950 relative"
           >
             <iframe
-              src="https://world.modon.com/abu-dhabi"
+              src="https://world.modon.com/abu-dhabi/"
               className="w-full h-[55vh] sm:h-[45vh] md:h-[400px] border-none"
               title="Modon Interactive Real Estate Map"
               allowFullScreen
