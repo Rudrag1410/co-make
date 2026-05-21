@@ -289,11 +289,11 @@ export function LeadForm() {
             viewport={{ once: true }}
             className="w-full rounded-[2rem] overflow-hidden border border-slate-950/10 shadow-[0_20px_60px_rgba(0,0,0,0.15)] bg-slate-950 relative"
           >
-            {/* Elegant floating overlay that covers only the Log In button inside the map's floating menu bar (desktop only to prevent breaking on mobile) */}
-            <div className="hidden md:block absolute top-[10px] right-[10px] w-[72px] h-[48px] bg-[#1a1a1c] z-10 pointer-events-auto rounded-r-[10px] border-l border-white/5" />
+            {/* Overlay to completely hide the Log In button at all screen sizes */}
+            <div className="absolute top-[15px] right-[12px] w-[60px] h-[50px] bg-[#151515] z-10 pointer-events-auto rounded-[8px]" />
             <iframe
-              src="https://world.modon.com/abu-dhabi/"
-              className="w-full h-[350px] md:h-[400px] border-none"
+              src="https://world.modon.com/abu-dhabi"
+              className="w-full h-[55vh] sm:h-[45vh] md:h-[400px] border-none"
               title="Modon Interactive Real Estate Map"
               allowFullScreen
               loading="lazy"

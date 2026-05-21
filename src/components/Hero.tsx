@@ -100,7 +100,7 @@ export function Hero() {
     const handleSuccess = (e: Event) => {
       const customEvent = e as CustomEvent;
       const action = customEvent.detail?.action;
-      
+
       const matchedProj = SIGNATURE_PROJECTS.find(p => p.galleryAction === action);
       if (matchedProj) {
         setGalleryImages(matchedProj.galleryImages);
@@ -218,11 +218,24 @@ export function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-gold/15 via-slate-950/70 to-gold/15 backdrop-blur-md border border-gold/30 px-5 py-2 rounded-full mb-6 shadow-xl"
+            className="inline-flex items-center space-x-2 bg-gradient-to-r from-gold/15 via-slate-950/70 to-gold/15 backdrop-blur-md border border-gold/30 px-5 py-2 rounded-full mb-6 shadow-xl cursor-pointer hover:border-gold/50 hover:scale-105 active:scale-[0.98] transition-all duration-300"
+            onClick={() => {
+              window.dispatchEvent(
+                new CustomEvent("open-inquiry-popup", {
+                  detail: {
+                    action: "partnership-discount",
+                    payload: {
+                      developer: "EXCLUSIVE",
+                      title: "10% Partnership Discount",
+                    },
+                  },
+                })
+              );
+            }}
           >
             <span className="w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
             <span className="text-gold text-[9px] font-extrabold uppercase tracking-[0.25em] drop-shadow-md">
-              Exclusive Luxury Collection 2024
+              Unlock up to 10% off through our exclusive partnership
             </span>
           </motion.div>
 
@@ -294,11 +307,10 @@ export function Hero() {
                         );
                       }
                     }}
-                    className={`absolute inset-0 w-full h-full flex items-center p-3 md:p-4 rounded-2xl border border-white/10 bg-slate-950/70 backdrop-blur-xl shadow-2xl transition-colors duration-500 ${
-                      isActive 
-                        ? "cursor-pointer border-gold/20 hover:border-gold/45 hover:bg-slate-950/85 hover:shadow-[0_25px_60px_rgba(200,155,60,0.22)]" 
-                        : "cursor-pointer hover:border-white/20 hover:bg-slate-950/80"
-                    }`}
+                    className={`absolute inset-0 w-full h-full flex items-center p-3 md:p-4 rounded-2xl border border-white/10 bg-slate-950/70 backdrop-blur-xl shadow-2xl transition-colors duration-500 ${isActive
+                      ? "cursor-pointer border-gold/20 hover:border-gold/45 hover:bg-slate-950/85 hover:shadow-[0_25px_60px_rgba(200,155,60,0.22)]"
+                      : "cursor-pointer hover:border-white/20 hover:bg-slate-950/80"
+                      }`}
                   >
                     {/* Glowing gold line running along the top of the active card */}
                     {isActive && (
@@ -455,7 +467,7 @@ export function Hero() {
               {[
                 {
                   label: "Sales Volume",
-                  value: 10,
+                  value: 1,
                   suffix: "B+",
                   prefix: "AED ",
                 },

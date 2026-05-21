@@ -43,22 +43,22 @@ export function TrendingProjects({ properties = [] }: { properties?: Property[] 
 
           {/* Navigation Controls and View All */}
           <div className="flex items-center space-x-4 self-start md:self-end">
-            <Link 
-              href="/listings" 
+            <Link
+              href="/listings"
               className="text-slate-950 font-bold text-[9px] uppercase tracking-widest border-b border-gold pb-1.5 hover:text-gold hover:border-gold/50 transition-all duration-300"
             >
               EXPLORE ALL
             </Link>
-            
+
             <div className="flex items-center space-x-2">
               {/* Unique custom swiper class triggers */}
-              <button 
+              <button
                 ref={prevRef}
                 className="swiper-prev-project w-9 h-9 rounded-full border border-slate-950/10 flex items-center justify-center text-slate-950 hover:bg-gold hover:border-gold hover:text-slate-950 active:scale-95 transition-all duration-300 cursor-pointer shadow-sm"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <button 
+              <button
                 ref={nextRef}
                 className="swiper-next-project w-9 h-9 rounded-full border border-slate-950/10 flex items-center justify-center text-slate-950 hover:bg-gold hover:border-gold hover:text-slate-950 active:scale-95 transition-all duration-300 cursor-pointer shadow-sm"
               >
@@ -88,8 +88,8 @@ export function TrendingProjects({ properties = [] }: { properties?: Property[] 
           className="pb-12 !overflow-visible"
         >
           {properties.map((project) => {
-            const description = project.description 
-              ? project.description.trim() 
+            const description = project.description
+              ? project.description.trim()
               : `Exclusive selection of premium apartments and luxury residences with state-of-the-art facilities.`;
 
             return (
@@ -113,22 +113,22 @@ export function TrendingProjects({ properties = [] }: { properties?: Property[] 
 
                     {/* Floating Badges - Top Left */}
                     <div className="absolute top-4 left-4 z-10 flex items-center space-x-2">
-                      <span className="bg-slate-950/80 backdrop-blur-md text-white text-[8px] font-bold px-3.5 py-1.5 rounded-full uppercase tracking-widest border border-white/10 shadow-lg">
-                        {project.category}
-                      </span>
-                      <div className="w-7 h-7 bg-white rounded-full p-1 shadow-md flex items-center justify-center border border-slate-950/5">
-                        <Image 
-                          src={project.developer.logo} 
-                          alt={project.developer.name} 
-                          width={16} 
-                          height={16} 
-                          className="object-contain w-full h-full grayscale opacity-75" 
+                      <div className="w-12 h-12 bg-white rounded-full p-2 shadow-md flex items-center justify-center border border-slate-950/5 transition-all duration-500 group-hover:border-gold/30 group-hover:shadow-[0_0_12px_rgba(200,155,60,0.25)] group-hover:scale-105">
+                        <Image
+                          src={project.developer.logo}
+                          alt={project.developer.name}
+                          width={32}
+                          height={32}
+                          className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105"
                         />
                       </div>
                     </div>
 
-                    {/* Floating ROI Tag - Top Right */}
-                    <div className="absolute top-4 right-4 z-10">
+                    {/* Floating Badges - Top Right */}
+                    <div className="absolute top-4 right-4 z-10 flex flex-col items-end space-y-1.5">
+                      <span className="bg-slate-950/80 backdrop-blur-md text-white text-[8px] font-bold px-3.5 py-1.5 rounded-full uppercase tracking-widest border border-white/10 shadow-lg">
+                        {project.category}
+                      </span>
                       <div className="bg-gold/90 backdrop-blur-md text-slate-950 text-[8px] font-bold px-3.5 py-1.5 rounded-full uppercase tracking-widest flex items-center space-x-1 shadow-lg border border-gold/20">
                         <TrendingUp className="w-3 h-3 shrink-0" />
                         <span>ROI {project.ROI.min}%+</span>

@@ -46,22 +46,22 @@ export default function RootLayout({
         {/* DuoChat Widget */}
         <Script id="duochat-widget" strategy="afterInteractive">
           {`
-  // DuoChat Widget - Includes "Powered by DuoChat" branding
-  (function(w,d,s,u,o,k,a,m){
+    // DuoChat Widget - Includes "Powered by DuoChat" branding
+    (function(w,d,s,u,o,k,a,m){
     w['DuoWidget']=o;w[o]=w[o]||function(){(w[o].q=w[o].q||[]).push(arguments)};
     a=d.createElement(s),m=d.getElementsByTagName(s)[0];
     a.async=1;a.src=u;m.parentNode.insertBefore(a,m);
   })(window,document,'script','https://duochat.io/widget.js','duo');
 
-            duo('init', {
-              "phoneNumber": "+971581161051",
-              "label": "Comake Homes",
-              "welcomeText": "Hello! How can we help you find your perfect luxury property in Dubai?",
-              "messageText": "Speak with an Expert",
-              "backgroundColor": "#0F172A",
-              "textColor": "#c89b3c",
-              "icon": "whatsappLogo"
-            });
+    duo('init', {
+      "phoneNumber": "+971581161051",
+      "label": "Comake Homes",
+      "welcomeText": "Hello! How can we help you find your perfect luxury property",
+      "messageText": "Speak with an Expert",
+      "backgroundColor" : "#25D366",
+      "textColor": "#ffffff",
+      "icon": "whatsappLogo"
+    });
           `}
         </Script>
       </body>

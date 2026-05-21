@@ -33,22 +33,22 @@ export function PropertyCard({ property }: { property: Property }) {
 
         {/* Floating Badges - Top Left */}
         <div className="absolute top-4 left-4 z-10 flex items-center space-x-2">
-          <span className="bg-slate-950/80 backdrop-blur-md text-white text-[8px] font-bold px-3.5 py-1.5 rounded-full uppercase tracking-widest border border-white/10 shadow-lg">
-            {property.category}
-          </span>
-          <div className="w-7 h-7 bg-white rounded-full p-1 shadow-md flex items-center justify-center border border-slate-950/5">
+          <div className="w-12 h-12 bg-white rounded-full p-2 shadow-md flex items-center justify-center border border-slate-950/5 transition-all duration-500 group-hover:border-gold/30 group-hover:shadow-[0_0_12px_rgba(200,155,60,0.25)] group-hover:scale-105">
             <Image
               src={property.developer.logo}
               alt={property.developer.name}
-              width={16}
-              height={16}
-              className="object-contain w-full h-full grayscale opacity-75"
+              width={32}
+              height={32}
+              className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105"
             />
           </div>
         </div>
 
-        {/* Floating ROI Tag - Top Right */}
-        <div className="absolute top-4 right-4 z-10">
+        {/* Floating Badges - Top Right */}
+        <div className="absolute top-4 right-4 z-10 flex flex-col items-end space-y-1.5">
+          <span className="bg-slate-950/80 backdrop-blur-md text-white text-[8px] font-bold px-3.5 py-1.5 rounded-full uppercase tracking-widest border border-white/10 shadow-lg">
+            {property.category}
+          </span>
           <div className="bg-gold/90 backdrop-blur-md text-slate-950 text-[8px] font-bold px-3.5 py-1.5 rounded-full uppercase tracking-widest flex items-center space-x-1 shadow-lg border border-gold/20">
             <TrendingUp className="w-3 h-3 shrink-0" />
             <span>ROI {property.ROI.min}%+</span>
