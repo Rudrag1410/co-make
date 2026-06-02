@@ -12,7 +12,55 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 
+import "swiper/css/effect-fade";
+
 export function PropertyDetailContent({ property }: { property: Property }) {
+  const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const openInquiry = (action: string) => {
+    window.dispatchEvent(
+      new CustomEvent("open-inquiry-popup", {
+        detail: {
+          action,
+          payload: {
+            title: property.title,
+            developer: property.developer.name,
+          },
+        },
+      })
+    );
+  };
+
+  const handleQuickSubmit = async () => {
+    if (!phoneNumber) {
+      // If no phone is entered, just open the modal
+      openInquiry("Request a call back");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phone: phoneNumber,
+          action: "Quick Sidebar Callback",
+          project: `${property.developer.name} - ${property.title}`,
+          sourcePage: window.location.pathname,
+        }),
+      });
+      alert("Thank you! Your request has been successfully submitted.");
+      setPhoneNumber("");
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="pt-24 pb-16">
       {/* Hero Gallery */}
@@ -218,7 +266,10 @@ export function PropertyDetailContent({ property }: { property: Property }) {
               </div>
 
               <div className="space-y-4">
-                <Button className="w-full bg-gold hover:bg-gold/90 text-slate-950 font-bold rounded-full py-6 text-xs uppercase tracking-widest">
+                <Button
+                  onClick={() => openInquiry("Book a Viewing")}
+                  className="w-full bg-gold hover:bg-gold/90 text-slate-950 font-bold rounded-full py-6 text-xs uppercase tracking-widest"
+                >
                   BOOK A VIEWING
                 </Button>
               </div>
@@ -229,11 +280,17 @@ export function PropertyDetailContent({ property }: { property: Property }) {
                 </p>
                 <input
                   type="text"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                   placeholder="Your Phone Number"
                   className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-6 text-xs text-white placeholder:text-white/20 focus:outline-none focus:border-gold mb-4"
                 />
-                <Button className="w-full bg-white/10 hover:bg-gold hover:text-slate-950 text-white border border-white/10 font-bold rounded-full py-3 text-[10px] uppercase tracking-widest transition-all">
-                  SUBMIT INQUIRY
+                <Button
+                  onClick={handleQuickSubmit}
+                  disabled={isSubmitting}
+                  className="w-full bg-white/10 hover:bg-gold hover:text-slate-950 text-white border border-white/10 font-bold rounded-full py-3 text-[10px] uppercase tracking-widest transition-all"
+                >
+                  {isSubmitting ? "SUBMITTING..." : "SUBMIT INQUIRY"}
                 </Button>
               </div>
             </div>

@@ -28,7 +28,6 @@ const formSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Invalid phone number"),
   propertyType: z.string().min(1, "Please select a property type"),
-  budget: z.string().min(1, "Please select your budget"),
   message: z.string().optional(),
 });
 
@@ -40,14 +39,39 @@ export function LeadForm() {
       email: "",
       phone: "",
       propertyType: "",
-      budget: "",
       message: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    alert("Thank you! Our consultant will contact you shortly.");
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: values.fullName,
+          email: values.email,
+          phone: values.phone,
+          propertyType: values.propertyType,
+          message: values.message,
+          action: "Lead Form Submission",
+          sourcePage: window.location.pathname,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Failed to submit");
+
+      form.reset();
+      alert("Thank you! Our consultant will contact you shortly.");
+    } catch (error) {
+      console.error(error);
+      alert("There was an error submitting your form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -267,10 +291,11 @@ export function LeadForm() {
 
                 <Button
                   type="submit"
-                  className="w-full bg-gold hover:bg-gold/90 text-slate-950 font-bold py-3.5 sm:py-5 rounded-lg text-[10px] tracking-[0.15em] sm:tracking-[0.2em] group min-h-[48px] mt-1"
+                  disabled={isSubmitting}
+                  className="w-full bg-gold hover:bg-gold/90 text-slate-950 font-bold py-3.5 sm:py-5 rounded-lg text-[10px] tracking-[0.15em] sm:tracking-[0.2em] group min-h-[48px] mt-1 disabled:opacity-70"
                 >
-                  SEND ENQUIRY
-                  <Send className="ml-2 w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  {isSubmitting ? "SENDING..." : "SEND ENQUIRY"}
+                  {!isSubmitting && <Send className="ml-2 w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
                 </Button>
                 <p className="text-center text-white/25 text-[8px] sm:text-[8px] uppercase font-bold tracking-[0.12em] sm:tracking-widest mt-2 sm:mt-4 pb-0">
                   By clicking send, you agree to our privacy policy.

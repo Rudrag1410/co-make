@@ -28,29 +28,28 @@ export function InquiryPopup() {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
-  // Sheet Submission Helper (Uses GET for robust cross-origin compatibility with Apps Script)
-  const sendLeadToSheet = (name: string, phoneNumber: string, action: string, project: string) => {
-    const sheetWebhook = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_WEBHOOK_URL;
-    console.log("Submitting Lead Data:", { name, phone: phoneNumber, action, project, webhook: sheetWebhook });
+  // Sheet Submission Helper
+  const sendLeadToSheet = async (name: string, phoneNumber: string, action: string, project: string) => {
+    console.log("Submitting Lead Data:", { name, phone: phoneNumber, action, project });
 
-    if (!sheetWebhook) {
-      console.warn(
-        "❌ WEBHOOK NOT CONFIGURED: NEXT_PUBLIC_GOOGLE_SHEETS_WEBHOOK_URL is undefined!\n" +
-        "👉 You MUST stop your terminal and restart the Next.js dev server ('yarn dev') to load your new .env.local file."
-      );
-      return;
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name,
+          phone: phoneNumber,
+          action: action,
+          project: project,
+          sourcePage: window.location.pathname,
+        }),
+      });
+      if (!response.ok) {
+        console.error("Failed to submit lead to spreadsheet");
+      }
+    } catch (err) {
+      console.error("Error submitting lead to spreadsheet", err);
     }
-    const params = new URLSearchParams({
-      timestamp: new Date().toLocaleString("en-US", { timeZone: "Asia/Dubai" }),
-      name: name,
-      phone: phoneNumber,
-      action: action,
-      project: project,
-    });
-    fetch(`${sheetWebhook}?${params.toString()}`, {
-      method: "GET",
-      mode: "no-cors",
-    }).catch((err) => console.error("Error submitting lead to spreadsheet", err));
   };
 
   // Helper to extract clean project/developer details for the Google Sheet
@@ -78,37 +77,6 @@ export function InquiryPopup() {
       const customEvent = e as CustomEvent;
       const action = customEvent.detail?.action;
       const payload = customEvent.detail?.payload;
-
-      const alreadySubmitted = typeof window !== "undefined" && sessionStorage.getItem("co-make-lead-submitted") === "true";
-
-      if (alreadySubmitted) {
-        const savedName = sessionStorage.getItem("co-make-lead-name") || "Returning User";
-        const savedPhone = sessionStorage.getItem("co-make-lead-phone") || "";
-
-        const projectContext = getProjectContext(action, payload);
-        sendLeadToSheet(
-          savedName,
-          savedPhone,
-          action || "Repeat Event",
-          projectContext
-        );
-
-        // Show a temporary success toast only for downloads (galleries and callbacks do not show toast)
-        const isDownload = action && (action.includes("download") || action.includes("pdf"));
-        if (isDownload) {
-          setToastMessage("Opening requested document...");
-          setShowToast(true);
-          setTimeout(() => setShowToast(false), 3000);
-        }
-
-        // Trigger success immediately without showing modal
-        window.dispatchEvent(
-          new CustomEvent("inquiry-success", {
-            detail: { action, payload },
-          })
-        );
-        return;
-      }
 
       setIsOpen(true);
       setHasSeen(true);
