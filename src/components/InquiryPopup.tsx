@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { CountryCodeSelect } from "@/components/CountryCodeSelect";
 
 interface InquiryPayload {
   title?: string;
@@ -22,6 +23,7 @@ export function InquiryPopup() {
 
   // Form State
   const [fullName, setFullName] = useState("");
+  const [countryCode, setCountryCode] = useState("+971");
   const [phone, setPhone] = useState("");
 
   // Toast State
@@ -29,8 +31,8 @@ export function InquiryPopup() {
   const [toastMessage, setToastMessage] = useState("");
 
   // Sheet Submission Helper
-  const sendLeadToSheet = async (name: string, phoneNumber: string, action: string, project: string) => {
-    console.log("Submitting Lead Data:", { name, phone: phoneNumber, action, project });
+  const sendLeadToSheet = async (name: string, cCode: string, phoneNumber: string, action: string, project: string) => {
+    console.log("Submitting Lead Data:", { name, countryCode: cCode, phone: phoneNumber, action, project });
 
     try {
       const response = await fetch("/api/leads", {
@@ -38,6 +40,7 @@ export function InquiryPopup() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: name,
+          countryCode: cCode,
           phone: phoneNumber,
           action: action,
           project: project,
@@ -119,6 +122,7 @@ export function InquiryPopup() {
     const projectContext = getProjectContext(pendingAction, pendingPayload);
     sendLeadToSheet(
       fullName,
+      countryCode,
       phone,
       pendingAction || "General Callback",
       projectContext
@@ -210,18 +214,32 @@ export function InquiryPopup() {
                       placeholder="John Doe"
                     />
                   </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 ml-1">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all"
-                      placeholder="+971 50 123 4567"
-                    />
+                  <div className="flex gap-2">
+                    <div className="w-[35%]">
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 ml-1">
+                        Country Code
+                      </label>
+                      <div className="relative">
+                        <CountryCodeSelect
+                          value={countryCode}
+                          onChange={setCountryCode}
+                          className="w-full h-11 bg-slate-50 border border-slate-200 rounded-xl px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all shadow-none"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 ml-1">
+                        Phone Number
+                      </label>
+                      <input
+                        type="number"
+                        required
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all"
+                        placeholder="50 123 4567"
+                      />
+                    </div>
                   </div>
 
                   <Button

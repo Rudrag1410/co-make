@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Mail, Phone, User, Send, Building, ChevronDown } from "lucide-react";
+import { CountryCodeSelect } from "@/components/CountryCodeSelect";
 
 const formFieldClassName =
   "h-11 w-full rounded-lg border border-white/10 !bg-white/5 text-sm text-white shadow-none placeholder:text-white/40 focus-visible:border-gold/40 focus-visible:ring-2 focus-visible:ring-gold/25 dark:!bg-white/5 dark:!border-white/10 sm:h-auto sm:min-h-[44px] sm:py-4 sm:text-xs md:py-5 pl-11 pr-4";
@@ -26,7 +27,8 @@ const formLabelClassName =
 const formSchema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Invalid phone number"),
+  countryCode: z.string().min(1, "Required"),
+  phone: z.string().min(5, "Invalid phone number"),
   propertyType: z.string().min(1, "Please select a property type"),
   message: z.string().optional(),
 });
@@ -37,6 +39,7 @@ export function LeadForm() {
     defaultValues: {
       fullName: "",
       email: "",
+      countryCode: "+971",
       phone: "",
       propertyType: "",
       message: "",
@@ -54,6 +57,7 @@ export function LeadForm() {
         body: JSON.stringify({
           name: values.fullName,
           email: values.email,
+          countryCode: values.countryCode,
           phone: values.phone,
           propertyType: values.propertyType,
           message: values.message,
@@ -223,28 +227,51 @@ export function LeadForm() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-5">
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem className="gap-1.5">
-                        <FormLabel className={formLabelClassName}>
-                          Phone Number
-                        </FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            <Phone className="absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2 text-gold w-3.5 h-3.5 pointer-events-none" />
-                            <Input
-                              placeholder="+971 58 116 1051"
-                              className={formFieldClassName}
-                              {...field}
-                            />
-                          </div>
-                        </FormControl>
-                        <FormMessage className="text-xs" />
-                      </FormItem>
-                    )}
-                  />
+                  <div className="flex gap-2">
+                    <FormField
+                      control={form.control}
+                      name="countryCode"
+                      render={({ field }) => (
+                        <FormItem className="gap-1.5 w-[35%] sm:w-[30%]">
+                          <FormLabel className={formLabelClassName}>
+                            Country Code
+                          </FormLabel>
+                          <FormControl>
+                            <div className="relative">
+                              <CountryCodeSelect
+                                className={`${formFieldClassName} px-3 !pl-3`}
+                                {...field}
+                              />
+                            </div>
+                          </FormControl>
+                          <FormMessage className="text-xs" />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem className="gap-1.5 flex-1">
+                          <FormLabel className={formLabelClassName}>
+                            Phone Number
+                          </FormLabel>
+                          <FormControl>
+                            <div className="relative">
+                              <Phone className="absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2 text-gold w-3.5 h-3.5 pointer-events-none" />
+                              <Input
+                                type="number"
+                                placeholder="58 116 1051"
+                                className={formFieldClassName}
+                                {...field}
+                              />
+                            </div>
+                          </FormControl>
+                          <FormMessage className="text-xs" />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                   <FormField
                     control={form.control}
                     name="propertyType"

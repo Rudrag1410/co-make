@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { sheets, auth } from "@googleapis/sheets";
+import { DuoChatClient, LeadSource } from "@duochat/sdk";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, phone, propertyType, action, project, message, sourcePage } = body;
+    const { name, email, countryCode, phone, propertyType, action, project, message, sourcePage } = body;
 
     let readableLocation = sourcePage || "";
     if (readableLocation === "/") readableLocation = "Home Page";
@@ -42,6 +43,7 @@ export async function POST(req: Request) {
       timestamp,
       name || "",
       email || "",
+      countryCode ? "'" + countryCode : "'+971",
       phone || "",
       propertyType || "",
       action || "",
@@ -59,6 +61,34 @@ export async function POST(req: Request) {
         values: [rowData],
       },
     });
+
+    // Create Lead via DuoChat
+    const duoApiKey = process.env.DUOCHAT_API_KEY;
+
+    if (duoApiKey) {
+      try {
+        const duo = new DuoChatClient({ apiKey: duoApiKey });
+
+        await duo.createLead({
+          name: name || undefined,
+          email: email || undefined,
+          countryCode: countryCode ? countryCode.replace('+', '') : undefined,
+          phoneNumber: phone || undefined,
+          source: LeadSource.SDK,
+          // customFields: [
+          //   { fieldId: "propertyType", value: propertyType || "N/A" },
+          //   { fieldId: "project", value: project || "N/A" },
+          //   { fieldId: "action", value: action || "N/A" },
+          //   { fieldId: "sourcePage", value: readableLocation || "N/A" }
+          // ]
+        });
+        console.log("Lead created successfully via DuoChat");
+      } catch (duoError) {
+        console.error("Failed to create lead via DuoChat:", duoError);
+      }
+    } else {
+      console.log("Skipping DuoChat lead creation: DUOCHAT_API_KEY not set.");
+    }
 
     return NextResponse.json({ success: true });
   } catch (error: any) {

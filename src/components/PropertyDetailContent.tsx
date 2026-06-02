@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MapPin, CheckCircle2, Share2, Heart } from "lucide-react";
+import { MapPin, CheckCircle2, Share2, Heart, Calendar, TrendingUp, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Property } from "@/lib/api";
 import Image from "next/image";
@@ -13,9 +13,11 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 
 import "swiper/css/effect-fade";
+import { CountryCodeSelect } from "@/components/CountryCodeSelect";
 
 export function PropertyDetailContent({ property }: { property: Property }) {
   const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [countryCode, setCountryCode] = React.useState("+971");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const openInquiry = (action: string) => {
@@ -45,6 +47,7 @@ export function PropertyDetailContent({ property }: { property: Property }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          countryCode: countryCode,
           phone: phoneNumber,
           action: "Quick Sidebar Callback",
           project: `${property.developer.name} - ${property.title}`,
@@ -227,72 +230,131 @@ export function PropertyDetailContent({ property }: { property: Property }) {
           </div>
 
           {/* Sidebar / Form */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-28 bg-slate-950 p-8 rounded-[2.5rem] shadow-2xl text-white">
-              <div className="mb-8">
-                <p className="text-gold text-[10px] font-bold uppercase tracking-widest mb-2">
-                  Starting Price
-                </p>
-                <h4 className="text-4xl font-serif font-bold mb-1">
-                  AED{" "}
-                  {property.startingPrice > 0
-                    ? property.startingPrice.toLocaleString("en-US")
-                    : "Contact Us"}
-                </h4>
-                <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest">
-                  Flexible Payment Plan: {property.paymentPlan}
-                </p>
+          <div className="lg:col-span-1 space-y-6">
+            <div className="sticky top-28 bg-[#0b0f19] rounded-[2rem] border border-white/5 shadow-2xl overflow-hidden text-white flex flex-col">
+
+              {/* Top Box for Price, Payment Plan, EOI */}
+              <div className="p-6 md:p-8 bg-[#0f1423] rounded-b-[2rem]">
+                {/* Starting Price */}
+                <div className="flex justify-between items-center mb-6">
+                  <span className="text-white/50 text-[10px] font-bold uppercase tracking-widest">
+                    Starting Price
+                  </span>
+                  <span className="text-gold text-2xl font-bold font-serif">
+                    {property.startingPrice > 0
+                      ? property.startingPrice > 1000000
+                        ? `AED ${(property.startingPrice / 1000000).toFixed(1)}M`
+                        : `AED ${property.startingPrice.toLocaleString("en-US")}`
+                      : "Contact Us"}
+                  </span>
+                </div>
+
+                <div className="h-px w-full bg-white/5 mb-6"></div>
+
+                {/* Payment Plan */}
+                <div className="flex justify-between items-center mb-6">
+                  <div className="flex items-center space-x-3 text-white/50">
+                    <Calendar className="w-4 h-4" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest">
+                      Payment Plan
+                    </span>
+                  </div>
+                  <span className="text-white font-bold text-sm">
+                    {property.paymentPlan || "Contact for Details"}
+                  </span>
+                </div>
+
+                <div className="h-px w-full bg-white/5 mb-6"></div>
+
+                {/* EOI Structure */}
+                <div className="flex justify-between items-start">
+                  <div className="flex items-start space-x-3 text-white/50 w-[45%]">
+                    <TrendingUp className="w-4 h-4 mt-0.5 shrink-0" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest leading-tight">
+                      EOI Structure
+                    </span>
+                  </div>
+                  <div className="w-[55%] flex justify-end">
+                    <span className="bg-[#2a2416] text-white/90 text-xs font-semibold px-4 py-3 rounded-lg leading-snug w-full text-left">
+                      10% Down Payment • Priority Booking
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center space-x-3 text-sm">
-                  <CheckCircle2 className="w-4 h-4 text-gold" />
-                  <span className="text-white/80">
-                    Premium Waterfront Location
-                  </span>
+              {/* Checkmarks */}
+              <div className="p-6 md:p-8 space-y-4">
+                <div className="flex items-center space-x-4">
+                  <CheckCircle2 className="w-[18px] h-[18px] text-gold shrink-0" />
+                  <span className="text-white text-sm font-medium tracking-wide">Only 700 Exclusive Units</span>
                 </div>
-                <div className="flex items-center space-x-3 text-sm">
-                  <CheckCircle2 className="w-4 h-4 text-gold" />
-                  <span className="text-white/80">
-                    High Rental Yield Potential
-                  </span>
+                <div className="flex items-center space-x-4">
+                  <CheckCircle2 className="w-[18px] h-[18px] text-gold shrink-0" />
+                  <span className="text-white text-sm font-medium tracking-wide">50+ Lifestyle Amenities</span>
                 </div>
-                <div className="flex items-center space-x-3 text-sm">
-                  <CheckCircle2 className="w-4 h-4 text-gold" />
-                  <span className="text-white/80">
-                    Exclusive Off-Plan Offer
+                <div className="flex items-center space-x-4">
+                  <CheckCircle2 className="w-[18px] h-[18px] text-gold shrink-0" />
+                  <span className="text-white text-sm font-medium tracking-wide">1 min to Emirates Road</span>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <CheckCircle2 className="w-[18px] h-[18px] text-gold shrink-0" />
+                  <span className="text-white text-sm font-medium tracking-wide">
+                    {property.bedrooms.join(", ")} BR + Maid + Sky Garden
                   </span>
                 </div>
               </div>
 
-              <div className="space-y-4">
+              {/* Buttons */}
+              <div className="p-6 md:p-8 pt-2 grid grid-cols-2 gap-4">
                 <Button
-                  onClick={() => openInquiry("Book a Viewing")}
-                  className="w-full bg-gold hover:bg-gold/90 text-slate-950 font-bold rounded-full py-6 text-xs uppercase tracking-widest"
+                  onClick={() => openInquiry("Download Brochure")}
+                  variant="outline"
+                  className="w-full bg-transparent hover:bg-white/5 border border-gold/30 text-gold font-bold rounded-2xl h-16 text-[9px] uppercase tracking-widest flex flex-col justify-center items-center gap-1 group"
                 >
-                  BOOK A VIEWING
+                  <div className="flex items-center gap-1">
+                    <Download className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform" />
+                    <span>DOWNLOAD</span>
+                  </div>
+                  <span>BROCHURE</span>
+                </Button>
+
+                <Button
+                  onClick={() => openInquiry("Register Interest")}
+                  className="w-full bg-gradient-to-br from-[#c8983f] via-[#e2be67] to-[#a47321] hover:opacity-90 text-slate-950 font-bold rounded-2xl h-16 text-[9px] uppercase tracking-widest border-none"
+                >
+                  REGISTER INTEREST
                 </Button>
               </div>
+            </div>
 
-              <div className="mt-8 pt-8 border-t border-white/10 text-center">
-                <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-4">
-                  Request a call back
-                </p>
+            {/* Quick Contact Form */}
+            <div className="bg-[#0b0f19] p-6 md:p-8 rounded-[2rem] shadow-2xl border border-white/5">
+              <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-4 text-center">
+                Request a call back
+              </p>
+              <div className="flex flex-col xl:flex-row gap-3 mb-4">
+                <div className="xl:w-[40%] w-full">
+                  <CountryCodeSelect
+                    value={countryCode}
+                    onChange={setCountryCode}
+                    className="w-full h-12 bg-white/5 border border-white/10 rounded-xl py-0 px-4 text-xs text-white focus:outline-none focus:border-gold shadow-none"
+                  />
+                </div>
                 <input
-                  type="text"
+                  type="number"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
-                  placeholder="Your Phone Number"
-                  className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-6 text-xs text-white placeholder:text-white/20 focus:outline-none focus:border-gold mb-4"
+                  placeholder="Phone Number"
+                  className="flex-1 bg-white/5 border border-white/10 rounded-xl h-12 px-4 text-xs text-white placeholder:text-white/20 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold"
                 />
-                <Button
-                  onClick={handleQuickSubmit}
-                  disabled={isSubmitting}
-                  className="w-full bg-white/10 hover:bg-gold hover:text-slate-950 text-white border border-white/10 font-bold rounded-full py-3 text-[10px] uppercase tracking-widest transition-all"
-                >
-                  {isSubmitting ? "SUBMITTING..." : "SUBMIT INQUIRY"}
-                </Button>
               </div>
+              <Button
+                onClick={handleQuickSubmit}
+                disabled={isSubmitting}
+                className="w-full bg-white/10 hover:bg-gold hover:text-slate-950 text-white border border-white/10 font-bold rounded-xl h-12 text-[10px] uppercase tracking-widest transition-all"
+              >
+                {isSubmitting ? "SUBMITTING..." : "SUBMIT INQUIRY"}
+              </Button>
             </div>
           </div>
         </div>
